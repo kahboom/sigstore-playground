@@ -6,13 +6,6 @@ export const Footer: Component = () => {
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-main">
-          <div class="footer-brand">
-            <span class="footer-logo">✨</span>
-            <span class="footer-text">
-              Built to help you understand <strong>Sigstore</strong>
-            </span>
-          </div>
-          
           <div class="footer-links">
             <a href="https://sigstore.dev" target="_blank" rel="noopener noreferrer">
               Sigstore.dev
@@ -37,7 +30,7 @@ export const Footer: Component = () => {
             🔐 Sigstore is a project under the <a href="https://openssf.org" target="_blank" rel="noopener noreferrer">Open Source Security Foundation (OpenSSF)</a>
           </p>
           <p class="footer-tech mono">
-            Built with SolidJS + TypeScript + 💜
+            Built with 💜
           </p>
           <p class="footer-disclaimer">
             Sigstore® and the Sigstore logo are trademarks of the Sigstore project. This project is unaffiliated and provided for educational purposes.

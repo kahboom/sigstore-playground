@@ -65,7 +65,7 @@ export const Header: Component<HeaderProps> = (props) => {
           rel="noopener noreferrer"
           class="btn btn-secondary docs-link"
         >
-          📚 Docs
+          Docs
         </a>
       </div>
     </header>

@@ -325,7 +325,11 @@ export const SigningJourney: Component = () => {
         </div>
         <div class="artifact-status">
           <Show when={completedSteps().has(STEPS.length - 1)} fallback={
-            <span class="status-pending">⏳ Awaiting signature...</span>
+            <Show when={completedSteps().has(3)} fallback={
+              <span class="status-pending">⏳ Awaiting signature...</span>
+            }>
+              <span class="status-signed">✍️ Signed</span>
+            </Show>
           }>
             <span class="status-signed">✅ Signed & Verified!</span>
           </Show>
