@@ -118,7 +118,7 @@ export const SigningJourney: Component = () => {
       setTimeout(() => setShowParticles(false), 1000);
       
       if (current < STEPS.length - 1) {
-        // Delay before advancing to let the user see the success state
+        // delay before advancing to let the user see the success state
         setTimeout(() => setCurrentStep(current + 1), 1200);
       }
     }
@@ -174,10 +174,10 @@ export const SigningJourney: Component = () => {
             class="btn btn-primary" 
             onClick={isPlaying() ? () => setIsPlaying(false) : playJourney}
           >
-            {isPlaying() ? '⏸ Pause' : '▶️ Auto Play'}
+            {isPlaying() ? '⏸ Pause' : '▶ Auto Play'}
           </button>
           <button class="btn btn-secondary" onClick={resetJourney}>
-            🔄 Reset
+            Reset
           </button>
         </div>
       </div>
