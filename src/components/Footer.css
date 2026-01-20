@@ -93,6 +93,17 @@
   color: var(--text-muted);
 }
 
+.footer-disclaimer {
+  width: 100%;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-subtle);
+}
+
 @media (max-width: 600px) {
   .footer-main {
     flex-direction: column;

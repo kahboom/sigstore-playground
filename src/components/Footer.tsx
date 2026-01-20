@@ -39,6 +39,9 @@ export const Footer: Component = () => {
           <p class="footer-tech mono">
             Built with SolidJS + TypeScript + 💜
           </p>
+          <p class="footer-disclaimer">
+            Sigstore® and the Sigstore logo are trademarks of the Sigstore project. This project is unaffiliated and provided for educational purposes.
+          </p>
         </div>
       </div>
     </footer>
