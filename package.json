@@ -1,0 +1,24 @@
+{
+  "name": "sigstore-playground",
+  "version": "1.0.0",
+  "description": "An interactive visual playground to learn how Sigstore works",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["sigstore", "security", "signing", "solidjs", "interactive"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "motion": "^10.18.0",
+    "solid-js": "^1.9.3",
+    "solid-motionone": "^1.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vite": "^6.0.6",
+    "vite-plugin-solid": "^2.11.0"
+  }
+}

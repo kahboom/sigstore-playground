@@ -1,0 +1,304 @@
+.component-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.explorer-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.explorer-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: var(--spacing-sm);
+}
+
+.explorer-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Component Selector */
+.component-selector {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.component-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: var(--bg-card);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  min-width: 140px;
+}
+
+.component-btn:hover {
+  transform: translateY(-4px);
+  border-color: var(--component-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.component-btn.active {
+  border-color: var(--component-color);
+  background: rgba(168, 85, 247, 0.1);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--component-color) 30%, transparent);
+}
+
+.component-btn-icon {
+  font-size: 2.5rem;
+}
+
+.component-btn-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+/* Component Details */
+.component-details {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+}
+
+.details-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.details-icon {
+  font-size: 4rem;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--component-color), color-mix(in srgb, var(--component-color) 50%, var(--accent-pink)));
+  border-radius: var(--radius-xl);
+}
+
+.details-title-section {
+  flex: 1;
+}
+
+.details-name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+  color: var(--component-color);
+}
+
+.details-tagline {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.details-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  max-width: 800px;
+}
+
+/* Details Grid */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 800px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.details-card {
+  padding: var(--spacing-lg);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.card-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.card-list li {
+  padding-left: var(--spacing-lg);
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.card-list:not(.numbered) li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--component-color);
+}
+
+.card-list.numbered li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding-left: 0;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--component-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.analogy-card,
+.fun-fact-card {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+}
+
+.analogy-text,
+.fun-fact-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Links */
+.details-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.links-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Ecosystem Diagram */
+.ecosystem-diagram {
+  padding: var(--spacing-2xl);
+}
+
+.diagram-title {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-primary);
+}
+
+.diagram-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+  padding: var(--spacing-xl) 0;
+}
+
+.diagram-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  min-width: 100px;
+}
+
+.diagram-node:hover {
+  transform: scale(1.05);
+}
+
+.diagram-node.highlighted {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 20px var(--accent-purple-glow);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.developer-node { border-color: var(--accent-green); }
+.cosign-node { border-color: var(--accent-green); }
+.oidc-node { border-color: var(--accent-orange); }
+.fulcio-node { border-color: var(--accent-purple); }
+.rekor-node { border-color: var(--accent-cyan); }
+.artifact-node { border-color: var(--accent-cyan); }
+
+.node-icon {
+  font-size: 1.5rem;
+}
+
+.node-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.diagram-arrow {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  animation: arrow-flow 1.5s ease-in-out infinite;
+}
+
+.diagram-arrow.vertical {
+  transform: rotate(90deg);
+}
+
+@keyframes arrow-flow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; color: var(--accent-purple); }
+}
+
+.diagram-branches {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.branch-top,
+.branch-middle,
+.branch-bottom {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
