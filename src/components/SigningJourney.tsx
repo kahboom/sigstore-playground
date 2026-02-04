@@ -277,6 +277,27 @@ export const SigningJourney: Component = () => {
           </Show>
         </div>
       </div>
+
+      {/* Advanced Topics Teaser */}
+      <Show when={completedSteps().has(STEPS.length - 1)}>
+        <Motion.div
+          class="advanced-teaser glass-card"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.4 }}
+        >
+          <h3>🎓 Ready for more?</h3>
+          <p>You've mastered the basics! Now learn about advanced supply chain security:</p>
+          <ul>
+            <li><strong>📋 Attestations & Provenance</strong> - Verifiable metadata about your builds</li>
+            <li><strong>🛡️ Policy Enforcement</strong> - Automated security compliance with Conforma</li>
+            <li><strong>🏆 SLSA Build Levels</strong> - Progressive security guarantees (L1-L4)</li>
+          </ul>
+          <p class="advanced-teaser-cta">
+            Check out Advanced Topics to dive deep into supply chain security →
+          </p>
+        </Motion.div>
+      </Show>
     </div>
   );
 };

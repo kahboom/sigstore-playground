@@ -1,7 +1,7 @@
 import { Component } from 'solid-js';
 import './Header.css';
 
-type View = 'journey' | 'explorer' | 'quiz';
+type View = 'journey' | 'explorer' | 'quiz' | 'advanced';
 
 interface HeaderProps {
   currentView: View;
@@ -49,6 +49,12 @@ export const Header: Component<HeaderProps> = props => {
             onClick={() => props.onViewChange('quiz')}
           >
             Test Your Knowledge
+          </button>
+          <button
+            class={`nav-btn ${props.currentView === 'advanced' ? 'active' : ''}`}
+            onClick={() => props.onViewChange('advanced')}
+          >
+            🎓 Advanced Topics
           </button>
         </nav>
 

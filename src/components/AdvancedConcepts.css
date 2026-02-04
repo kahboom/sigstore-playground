@@ -1,0 +1,221 @@
+.advanced-concepts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.advanced-header {
+  text-align: center;
+}
+
+.advanced-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: -0.02em;
+}
+
+.advanced-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Topic Selector */
+.topic-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.topic-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl);
+  background: var(--bg-card);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.topic-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--topic-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.topic-card.active {
+  border-color: var(--topic-color);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 20px var(--topic-color);
+}
+
+.difficulty-badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+}
+
+.topic-icon {
+  font-size: 3rem;
+}
+
+.topic-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Topic Content */
+.topic-content {
+  padding: var(--spacing-xl);
+}
+
+.topic-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.topic-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Concept Accordion */
+.concepts-list {
+  margin: var(--spacing-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.concept-item {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-tertiary);
+}
+
+.concept-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-base);
+  text-align: left;
+}
+
+.concept-header:hover {
+  background: var(--bg-card-hover);
+}
+
+.concept-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.concept-toggle {
+  font-size: 1.5rem;
+  color: var(--topic-color, var(--accent-purple));
+  font-weight: 300;
+  min-width: 24px;
+  text-align: center;
+}
+
+.concept-content {
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  overflow: hidden;
+}
+
+.concept-text {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-md);
+}
+
+.code-example {
+  background: var(--bg-primary);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--topic-color, var(--accent-purple));
+  overflow-x: auto;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Topic Sections */
+.topic-section {
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--topic-color, var(--accent-purple));
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.section-text {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Resources */
+.topic-resources {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.resources-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .advanced-title {
+    font-size: 2rem;
+  }
+
+  .topic-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-title {
+    font-size: 1.5rem;
+  }
+}

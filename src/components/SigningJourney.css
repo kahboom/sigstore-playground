@@ -1032,3 +1032,57 @@
     text-shadow: 0 0 20px var(--accent-green-glow);
   }
 }
+
+/* Advanced Topics Teaser */
+.advanced-teaser {
+  padding: var(--spacing-xl);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(168, 85, 247, 0.1));
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.advanced-teaser h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.advanced-teaser p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.advanced-teaser ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.advanced-teaser li {
+  padding-left: var(--spacing-lg);
+  position: relative;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.advanced-teaser li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+  font-weight: bold;
+}
+
+.advanced-teaser strong {
+  color: var(--text-primary);
+}
+
+.advanced-teaser-cta {
+  font-weight: 500;
+  color: var(--accent-purple);
+  margin-bottom: 0;
+}
