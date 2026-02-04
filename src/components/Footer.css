@@ -1,11 +1,17 @@
 .footer {
   margin-top: auto;
-  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md); /* Tighter on mobile */
   background: rgba(10, 14, 23, 0.8);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--border-subtle);
   position: relative;
   z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+  }
 }
 
 .footer-content {
