@@ -6,10 +6,17 @@
 
 .journey-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--spacing-xl);
-  flex-wrap: wrap;
+  flex-direction: column; /* Stack on mobile */
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .journey-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-xl);
+  }
 }
 
 .journey-title-section {
@@ -53,6 +60,14 @@
 .journey-controls {
   display: flex;
   gap: var(--spacing-sm);
+  width: 100%; /* Full width on mobile */
+  justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+  .journey-controls {
+    width: auto;
+  }
 }
 
 /* Flow Diagram */
@@ -97,18 +112,34 @@
 }
 
 .flow-node-icon {
-  width: 50px;
-  height: 50px;
+  width: 70px; /* Larger on mobile for better visibility */
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 2rem; /* Larger emoji/icon */
   background: var(--bg-secondary);
   border: 2px solid var(--border-subtle);
   border-radius: 50%;
   transition: all var(--transition-base);
   position: relative;
   z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .flow-node-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flow-node-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
 }
 
 .flow-node.active .flow-node-icon {
@@ -153,10 +184,23 @@
 }
 
 .flow-node-label {
-  font-size: 0.75rem;
+  font-size: 0.85rem; /* Larger on mobile */
   color: var(--text-muted);
   font-weight: 500;
   white-space: nowrap;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .flow-node-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flow-node-label {
+    font-size: 0.75rem;
+  }
 }
 
 .flow-node.active .flow-node-label {
