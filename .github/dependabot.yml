@@ -1,0 +1,33 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: ":ghost: "
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: ":ghost: "
+
+    allow:
+      - dependency-type: direct
+
+    groups:
+      linting:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+          - "eslint-*"
+          - "prettier"
+
+      tools:
+        patterns:
+           - "@vitejs/*"
+           - "vite"
+           - "vite-*"
+           - "@hey-api/*"
