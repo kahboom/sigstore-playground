@@ -6,17 +6,10 @@
 
 .journey-header {
   display: flex;
-  flex-direction: column; /* Stack on mobile */
-  gap: var(--spacing-md);
-}
-
-@media (min-width: 768px) {
-  .journey-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--spacing-xl);
-  }
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-xl);
+  flex-wrap: wrap;
 }
 
 .journey-title-section {
@@ -24,7 +17,7 @@
 }
 
 .journey-title {
-  font-size: 1.75rem; /* Smaller on mobile */
+  font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: var(--spacing-sm);
   letter-spacing: -0.02em;
@@ -32,65 +25,33 @@
 
 .journey-subtitle {
   color: var(--text-secondary);
-  font-size: 0.95rem; /* Smaller on mobile */
-  max-width: 100%;
-}
-
-@media (min-width: 768px) {
-  .journey-title {
-    font-size: 2rem;
-  }
-
-  .journey-subtitle {
-    font-size: 1rem;
-    max-width: 500px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .journey-title {
-    font-size: 2.5rem;
-  }
-
-  .journey-subtitle {
-    font-size: 1.1rem;
-  }
+  font-size: 1.1rem;
+  max-width: 500px;
 }
 
 .journey-controls {
   display: flex;
   gap: var(--spacing-sm);
-  width: 100%; /* Full width on mobile */
-  justify-content: flex-start;
-}
-
-@media (min-width: 768px) {
-  .journey-controls {
-    width: auto;
-  }
 }
 
 /* Flow Diagram */
 .flow-container {
-  overflow-x: visible; /* No scroll on mobile */
+  overflow-x: auto;
   padding: var(--spacing-md) 0;
 }
 
 .flow-diagram {
   display: flex;
-  flex-direction: column; /* Stack vertically on mobile */
+  flex-wrap: wrap; /* Wraps naturally on mobile - creates 2x2 or 3x2 grid */
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
+  max-width: 100%;
 }
 
 @media (min-width: 768px) {
-  .flow-container {
-    overflow-x: auto; /* Allow scroll on tablet if needed */
-  }
-
   .flow-diagram {
-    flex-direction: row; /* Horizontal on larger screens */
+    flex-wrap: nowrap; /* Single horizontal row on desktop */
     gap: 0;
     min-width: max-content;
   }
@@ -160,7 +121,7 @@
 }
 
 .flow-node-connector {
-  display: none; /* Hidden on mobile, use vertical connector */
+  display: none; /* Hidden on mobile with flexbox wrap */
   position: absolute;
   top: 50%;
   right: -50%;
@@ -169,6 +130,12 @@
   background: var(--border-subtle);
   transform: translateY(-50%);
   z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .flow-node-connector {
+    display: block; /* Show horizontal connector on desktop */
+  }
 }
 
 .flow-node:last-child .flow-node-connector {
@@ -209,41 +176,6 @@
 
 .flow-node.completed .flow-node-label {
   color: var(--accent-green);
-}
-
-/* Vertical connector for mobile */
-.flow-node::after {
-  content: '';
-  position: absolute;
-  bottom: -1rem;
-  left: 50%;
-  width: 2px;
-  height: 1rem;
-  background: var(--border-subtle);
-  transform: translateX(-50%);
-  display: block;
-}
-
-.flow-node:last-child::after {
-  display: none;
-}
-
-.flow-node.completed::after {
-  background: var(--accent-green);
-}
-
-.flow-node.active::after {
-  background: linear-gradient(180deg, var(--accent-purple), var(--border-subtle));
-}
-
-@media (min-width: 768px) {
-  .flow-node::after {
-    display: none; /* Hide on desktop, use horizontal connector */
-  }
-
-  .flow-node-connector {
-    display: block; /* Show horizontal connector */
-  }
 }
 
 /* Main Content */
