@@ -17,7 +17,7 @@
 }
 
 .journey-title {
-  font-size: 2.5rem;
+  font-size: 1.75rem; /* Smaller on mobile */
   font-weight: 800;
   margin-bottom: var(--spacing-sm);
   letter-spacing: -0.02em;
@@ -25,8 +25,29 @@
 
 .journey-subtitle {
   color: var(--text-secondary);
-  font-size: 1.1rem;
-  max-width: 500px;
+  font-size: 0.95rem; /* Smaller on mobile */
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .journey-title {
+    font-size: 2rem;
+  }
+
+  .journey-subtitle {
+    font-size: 1rem;
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .journey-title {
+    font-size: 2.5rem;
+  }
+
+  .journey-subtitle {
+    font-size: 1.1rem;
+  }
 }
 
 .journey-controls {
@@ -36,16 +57,28 @@
 
 /* Flow Diagram */
 .flow-container {
-  overflow-x: auto;
+  overflow-x: visible; /* No scroll on mobile */
   padding: var(--spacing-md) 0;
 }
 
 .flow-diagram {
   display: flex;
+  flex-direction: column; /* Stack vertically on mobile */
   align-items: center;
   justify-content: center;
-  gap: 0;
-  min-width: max-content;
+  gap: var(--spacing-sm);
+}
+
+@media (min-width: 768px) {
+  .flow-container {
+    overflow-x: auto; /* Allow scroll on tablet if needed */
+  }
+
+  .flow-diagram {
+    flex-direction: row; /* Horizontal on larger screens */
+    gap: 0;
+    min-width: max-content;
+  }
 }
 
 .flow-node {
@@ -96,6 +129,7 @@
 }
 
 .flow-node-connector {
+  display: none; /* Hidden on mobile, use vertical connector */
   position: absolute;
   top: 50%;
   right: -50%;
@@ -131,6 +165,41 @@
 
 .flow-node.completed .flow-node-label {
   color: var(--accent-green);
+}
+
+/* Vertical connector for mobile */
+.flow-node::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  width: 2px;
+  height: 1rem;
+  background: var(--border-subtle);
+  transform: translateX(-50%);
+  display: block;
+}
+
+.flow-node:last-child::after {
+  display: none;
+}
+
+.flow-node.completed::after {
+  background: var(--accent-green);
+}
+
+.flow-node.active::after {
+  background: linear-gradient(180deg, var(--accent-purple), var(--border-subtle));
+}
+
+@media (min-width: 768px) {
+  .flow-node::after {
+    display: none; /* Hide on desktop, use horizontal connector */
+  }
+
+  .flow-node-connector {
+    display: block; /* Show horizontal connector */
+  }
 }
 
 /* Main Content */
@@ -194,11 +263,17 @@
 
 .terminal {
   width: 100%;
-  max-width: 400px;
+  max-width: 100%; /* Full width on mobile */
   background: #1a1a2e;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 600px) {
+  .terminal {
+    max-width: 400px;
+  }
 }
 
 .terminal-header {
@@ -665,15 +740,25 @@
 .step-badge.verifier { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
 
 .step-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem; /* Smaller on mobile */
   font-weight: 700;
   margin-bottom: var(--spacing-sm);
 }
 
 .step-description {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 0.9rem; /* Smaller on mobile */
   margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .step-title {
+    font-size: 1.5rem;
+  }
+
+  .step-description {
+    font-size: 1rem;
+  }
 }
 
 .step-details {
@@ -764,11 +849,21 @@
 .artifact-hash {
   flex: 1;
   display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 0.8rem;
+  flex-direction: column; /* Stack on mobile */
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  font-size: 0.75rem;
   color: var(--text-muted);
-  min-width: 300px;
+  min-width: 0; /* Allow shrinking */
+}
+
+@media (min-width: 768px) {
+  .artifact-hash {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.8rem;
+  }
 }
 
 .hash-label {
@@ -778,6 +873,13 @@
 .hash-value {
   color: var(--accent-cyan);
   word-break: break-all;
+  font-size: 0.7rem; /* Smaller on mobile */
+}
+
+@media (min-width: 768px) {
+  .hash-value {
+    font-size: 0.8rem;
+  }
 }
 
 .artifact-status {
