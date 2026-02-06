@@ -17,15 +17,25 @@ describe('Footer', () => {
     it('renders footer note about OpenSSF', () => {
       render(() => <Footer />);
 
-      expect(screen.getByText(/Sigstore is a project under the/i)).toBeInTheDocument();
-      expect(screen.getByText('Open Source Security Foundation (OpenSSF)')).toBeInTheDocument();
+      expect(
+        screen.getByText(/Sigstore is a project under the/i)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Open Source Security Foundation (OpenSSF)')
+      ).toBeInTheDocument();
     });
 
     it('renders disclaimer', () => {
       render(() => <Footer />);
 
-      expect(screen.getByText(/Sigstore® and the Sigstore logo are trademarks/i)).toBeInTheDocument();
-      expect(screen.getByText(/This project is unaffiliated and provided for educational purposes/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Sigstore® and the Sigstore logo are trademarks/i)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /This project is unaffiliated and provided for educational purposes/i
+        )
+      ).toBeInTheDocument();
     });
 
     it('renders dividers between links', () => {
@@ -68,7 +78,9 @@ describe('Footer', () => {
     it('OpenSSF link has correct URL', () => {
       render(() => <Footer />);
 
-      const link = screen.getByText('Open Source Security Foundation (OpenSSF)').closest('a');
+      const link = screen
+        .getByText('Open Source Security Foundation (OpenSSF)')
+        .closest('a');
       expect(link).toHaveAttribute('href', 'https://openssf.org');
     });
 
@@ -76,7 +88,7 @@ describe('Footer', () => {
       render(() => <Footer />);
 
       const links = screen.getAllByRole('link');
-      
+
       links.forEach(link => {
         expect(link).toHaveAttribute('target', '_blank');
         expect(link).toHaveAttribute('rel', 'noopener noreferrer');
@@ -136,14 +148,18 @@ describe('Footer', () => {
       setViewport(VIEWPORTS.mobile.width, VIEWPORTS.mobile.height);
       render(() => <Footer />);
 
-      expect(screen.getByText(/Sigstore is a project under the/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Sigstore is a project under the/i)
+      ).toBeInTheDocument();
     });
 
     it('renders disclaimer on mobile', () => {
       setViewport(VIEWPORTS.mobile.width, VIEWPORTS.mobile.height);
       render(() => <Footer />);
 
-      expect(screen.getByText(/Sigstore® and the Sigstore logo are trademarks/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Sigstore® and the Sigstore logo are trademarks/i)
+      ).toBeInTheDocument();
     });
 
     it('maintains link functionality on mobile', () => {
@@ -219,7 +235,7 @@ describe('Footer', () => {
 
       const footerLinks = document.querySelector('.footer-links');
       expect(footerLinks).toBeInTheDocument();
-      
+
       const links = screen.getAllByRole('link');
       expect(links.length).toBe(5);
     });
