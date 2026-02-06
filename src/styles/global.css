@@ -5,7 +5,7 @@
   --bg-tertiary: #1a2332;
   --bg-card: rgba(17, 24, 39, 0.7);
   --bg-card-hover: rgba(26, 35, 50, 0.9);
-  
+
   /* Accent colors */
   --accent-purple: #a855f7;
   --accent-purple-glow: rgba(168, 85, 247, 0.4);
@@ -17,29 +17,29 @@
   --accent-orange-glow: rgba(249, 115, 22, 0.4);
   --accent-pink: #ec4899;
   --accent-pink-glow: rgba(236, 72, 153, 0.4);
-  
+
   /* Text colors */
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  
+
   /* Component colors */
   --fulcio-color: #a855f7;
   --rekor-color: #06b6d4;
   --cosign-color: #10b981;
   --oidc-color: #f97316;
-  
+
   /* Borders */
   --border-subtle: rgba(148, 163, 184, 0.1);
   --border-accent: rgba(168, 85, 247, 0.3);
-  
+
   /* Shadows */
   --shadow-glow: 0 0 60px rgba(168, 85, 247, 0.15);
-  
+
   /* Typography */
   --font-display: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
+
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -48,14 +48,14 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
-  
+
   /* Border radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
-  
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
@@ -68,7 +68,9 @@
   --breakpoint-xl: 1400px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -197,7 +199,8 @@ body {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
   25% {
@@ -228,7 +231,7 @@ body {
 .grid-overlay {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;

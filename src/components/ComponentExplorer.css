@@ -91,7 +91,8 @@
 .component-btn.active {
   border-color: var(--component-color);
   background: rgba(168, 85, 247, 0.1);
-  box-shadow: 0 0 30px color-mix(in srgb, var(--component-color) 30%, transparent);
+  box-shadow: 0 0 30px
+    color-mix(in srgb, var(--component-color) 30%, transparent);
 }
 
 .component-btn-icon {
@@ -129,7 +130,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--component-color), color-mix(in srgb, var(--component-color) 50%, var(--accent-pink)));
+  background: linear-gradient(
+    135deg,
+    var(--component-color),
+    color-mix(in srgb, var(--component-color) 50%, var(--accent-pink))
+  );
   border-radius: var(--radius-xl);
 }
 
@@ -257,7 +262,11 @@
 
 .analogy-card,
 .fun-fact-card {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.1),
+    rgba(6, 182, 212, 0.1)
+  );
 }
 
 .analogy-text,
@@ -325,12 +334,24 @@
   background: rgba(168, 85, 247, 0.1);
 }
 
-.developer-node { border-color: var(--accent-green); }
-.cosign-node { border-color: var(--accent-green); }
-.oidc-node { border-color: var(--accent-orange); }
-.fulcio-node { border-color: var(--accent-purple); }
-.rekor-node { border-color: var(--accent-cyan); }
-.artifact-node { border-color: var(--accent-cyan); }
+.developer-node {
+  border-color: var(--accent-green);
+}
+.cosign-node {
+  border-color: var(--accent-green);
+}
+.oidc-node {
+  border-color: var(--accent-orange);
+}
+.fulcio-node {
+  border-color: var(--accent-purple);
+}
+.rekor-node {
+  border-color: var(--accent-cyan);
+}
+.artifact-node {
+  border-color: var(--accent-cyan);
+}
 
 .node-icon {
   font-size: 1.5rem;
@@ -353,8 +374,14 @@
 }
 
 @keyframes arrow-flow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; color: var(--accent-purple); }
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+    color: var(--accent-purple);
+  }
 }
 
 .diagram-branches {

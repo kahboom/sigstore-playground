@@ -1,5 +1,7 @@
 # Sigstore Playground
 
+[![codecov](https://codecov.io/gh/kahboom/sigstore-playground/graph/badge.svg)](https://codecov.io/gh/kahboom/sigstore-playground)
+
 An interactive, visual playground to learn how [Sigstore](https://sigstore.dev) works! Built with SolidJS and TypeScript.
 
 ## Features
@@ -24,7 +26,7 @@ Each component includes:
 - Fun facts
 
 ### Knowledge Quiz
-Test your understanding with 10 carefully crafted questions covering:
+Test your understanding with questions covering:
 - Keyless signing concepts
 - Certificate lifecycle
 - Transparency logs
@@ -45,6 +47,33 @@ npm run build
 # Preview production build
 npm run preview
 ```
+
+## Testing
+
+This project uses [Vitest](https://vitest.dev/) for testing with comprehensive coverage of all components.
+
+### Run Tests
+
+```bash
+# Run tests in watch mode
+npm test
+
+# Run tests once
+npm run test -- --run
+
+# Run tests with coverage report
+npm run coverage
+```
+
+### Test Coverage
+
+Test coverage includes:
+- Component rendering and behavior
+- User interactions and navigation  
+- Mobile responsiveness (375px, 768px, 1024px viewports)
+- Edge cases and error states
+
+Coverage reports are automatically uploaded to [Codecov](https://codecov.io/gh/kahboom/sigstore-playground) on every push.
 
 ## Tech Stack
 
