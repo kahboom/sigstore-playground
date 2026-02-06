@@ -22,11 +22,7 @@ jobs:
 
       - run: npm ci --ignore-scripts
 
-      - name: Build common package
-        run: npm run build -w common
-
       - name: Run tests with coverage
-        working-directory: client
         run: npm run coverage
 
       - name: Upload coverage report
@@ -40,4 +36,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: ${{ github.repository_owner }}/sigstore-playground
           flags: unit
-          directory: client
