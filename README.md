@@ -1,18 +1,16 @@
-# Sigstore Playground ✨
+# Sigstore Playground
 
 An interactive, visual playground to learn how [Sigstore](https://sigstore.dev) works! Built with SolidJS and TypeScript.
 
-![Sigstore Playground](https://sigstore.dev/img/sigstore-logo.svg)
-
 ## Features
 
-### 🚀 Signing Journey
+### Signing Journey
 Step through the entire Sigstore signing flow with beautiful animations:
 - Watch how keyless signing works step-by-step
 - Interactive controls to pause, play, and navigate
 - Visual representations of each component (Cosign, Fulcio, Rekor, OIDC)
 
-### 🔍 Component Explorer
+### Component Explorer
 Deep dive into each piece of the Sigstore ecosystem:
 - **Cosign** - The signing Swiss army knife
 - **Fulcio** - Identity-based certificate authority
@@ -25,7 +23,7 @@ Each component includes:
 - Real-world analogies
 - Fun facts
 
-### 🧠 Knowledge Quiz
+### Knowledge Quiz
 Test your understanding with 10 carefully crafted questions covering:
 - Keyless signing concepts
 - Certificate lifecycle
@@ -61,13 +59,3 @@ npm run preview
 - [Sigstore Blog](https://blog.sigstore.dev)
 - [GitHub Organization](https://github.com/sigstore)
 - [Slack Community](https://slack.sigstore.dev)
-
-## Inspiration
-
-This project was inspired by:
-- [Julia Evans' Wizard Zines experiments](https://wizardzines.com/#experiments)
-- [Alicia Sykes' interactive tools](https://010000010110110001101001011000110110100101100001.com/)
-
-## License
-
-MIT

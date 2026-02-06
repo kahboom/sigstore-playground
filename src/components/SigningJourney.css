@@ -2,6 +2,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  margin: calc(var(--spacing-md) * -1);
+}
+
+@media (min-width: 768px) {
+  .signing-journey {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .journey-header {
@@ -17,16 +26,28 @@
 }
 
 .journey-title {
-  font-size: 2.5rem;
+  font-size: 2.857rem; /* 40px at 14px base - matches main branch appearance */
   font-weight: 800;
   margin-bottom: var(--spacing-sm);
   letter-spacing: -0.02em;
 }
 
+@media (min-width: 768px) {
+  .journey-title {
+    font-size: 2.5rem; /* Standard size on desktop */
+  }
+}
+
 .journey-subtitle {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 1.25rem; /* Slightly larger on mobile for readability */
   max-width: 500px;
+}
+
+@media (min-width: 768px) {
+  .journey-subtitle {
+    font-size: 1.1rem;
+  }
 }
 
 .journey-controls {
@@ -36,16 +57,51 @@
 
 /* Flow Diagram */
 .flow-container {
-  overflow-x: auto;
+  overflow-x: auto; /* Horizontal scroll on mobile */
+  overflow-y: hidden;
   padding: var(--spacing-md) 0;
+  display: flex;
+  justify-content: flex-start;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  position: relative;
+}
+
+/* Hide scrollbar but keep functionality */
+.flow-container::-webkit-scrollbar {
+  display: none;
+}
+
+.flow-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (min-width: 768px) {
+  .flow-container {
+    justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: none;
+  }
 }
 
 .flow-diagram {
   display: flex;
+  flex-wrap: nowrap; /* Single horizontal row on mobile for carousel */
   align-items: center;
-  justify-content: center;
-  gap: 0;
+  justify-content: flex-start;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
   min-width: max-content;
+}
+
+@media (min-width: 768px) {
+  .flow-diagram {
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+  }
 }
 
 .flow-node {
@@ -55,8 +111,17 @@
   gap: var(--spacing-sm);
   cursor: pointer;
   position: relative;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-sm);
   transition: all var(--transition-base);
+  scroll-snap-align: center; /* Snap to center on carousel scroll */
+  flex-shrink: 0; /* Prevent shrinking in carousel */
+}
+
+@media (min-width: 768px) {
+  .flow-node {
+    padding: var(--spacing-sm) var(--spacing-md);
+    scroll-snap-align: none;
+  }
 }
 
 .flow-node:hover .flow-node-icon {
@@ -64,18 +129,34 @@
 }
 
 .flow-node-icon {
-  width: 50px;
-  height: 50px;
+  width: 70px; /* Larger on mobile for better visibility */
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 2rem; /* Larger emoji/icon */
   background: var(--bg-secondary);
   border: 2px solid var(--border-subtle);
   border-radius: 50%;
   transition: all var(--transition-base);
   position: relative;
   z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .flow-node-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flow-node-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
 }
 
 .flow-node.active .flow-node-icon {
@@ -96,6 +177,7 @@
 }
 
 .flow-node-connector {
+  display: block; /* Always show connector on mobile for carousel */
   position: absolute;
   top: 50%;
   right: -50%;
@@ -104,6 +186,12 @@
   background: var(--border-subtle);
   transform: translateY(-50%);
   z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .flow-node-connector {
+    display: block;
+  }
 }
 
 .flow-node:last-child .flow-node-connector {
@@ -119,10 +207,23 @@
 }
 
 .flow-node-label {
-  font-size: 0.75rem;
+  font-size: 0.85rem; /* Larger on mobile */
   color: var(--text-muted);
   font-weight: 500;
   white-space: nowrap;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .flow-node-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flow-node-label {
+    font-size: 0.75rem;
+  }
 }
 
 .flow-node.active .flow-node-label {
@@ -194,11 +295,17 @@
 
 .terminal {
   width: 100%;
-  max-width: 400px;
+  max-width: 100%; /* Full width on mobile */
   background: #1a1a2e;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 600px) {
+  .terminal {
+    max-width: 400px;
+  }
 }
 
 .terminal-header {
@@ -665,15 +772,25 @@
 .step-badge.verifier { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
 
 .step-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem; /* Smaller on mobile */
   font-weight: 700;
   margin-bottom: var(--spacing-sm);
 }
 
 .step-description {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 0.9rem; /* Smaller on mobile */
   margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .step-title {
+    font-size: 1.5rem;
+  }
+
+  .step-description {
+    font-size: 1rem;
+  }
 }
 
 .step-details {
@@ -764,11 +881,21 @@
 .artifact-hash {
   flex: 1;
   display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 0.8rem;
+  flex-direction: column; /* Stack on mobile */
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  font-size: 0.75rem;
   color: var(--text-muted);
-  min-width: 300px;
+  min-width: 0; /* Allow shrinking */
+}
+
+@media (min-width: 768px) {
+  .artifact-hash {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.8rem;
+  }
 }
 
 .hash-label {
@@ -778,6 +905,13 @@
 .hash-value {
   color: var(--accent-cyan);
   word-break: break-all;
+  font-size: 0.7rem; /* Smaller on mobile */
+}
+
+@media (min-width: 768px) {
+  .hash-value {
+    font-size: 0.8rem;
+  }
 }
 
 .artifact-status {
