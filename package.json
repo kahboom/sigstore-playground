@@ -23,7 +23,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "motion": "^10.18.0",
+    "motion": "^12.33.0",
     "solid-js": "^1.9.3",
     "solid-motionone": "^1.0.3"
   },
