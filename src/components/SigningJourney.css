@@ -57,8 +57,16 @@
 
 /* Flow Diagram */
 .flow-container {
-  overflow-x: auto;
+  overflow-x: visible; /* No scroll on mobile, let it wrap naturally */
   padding: var(--spacing-md) 0;
+  display: flex;
+  justify-content: center; /* Center the diagram container */
+}
+
+@media (min-width: 768px) {
+  .flow-container {
+    overflow-x: auto; /* Allow scroll on desktop if needed */
+  }
 }
 
 .flow-diagram {
@@ -85,8 +93,14 @@
   gap: var(--spacing-sm);
   cursor: pointer;
   position: relative;
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-sm); /* Equal padding for centered alignment */
   transition: all var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .flow-node {
+    padding: var(--spacing-sm) var(--spacing-md); /* Restore horizontal padding on desktop */
+  }
 }
 
 .flow-node:hover .flow-node-icon {
