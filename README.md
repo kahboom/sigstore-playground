@@ -1,6 +1,6 @@
-[![codecov](https://codecov.io/gh/kahboom/sigstore-playground/graph/badge.svg)](https://codecov.io/gh/kahboom/sigstore-playground)
-
 # Sigstore Playground
+
+[![codecov](https://codecov.io/gh/kahboom/sigstore-playground/graph/badge.svg)](https://codecov.io/gh/kahboom/sigstore-playground)
 
 An interactive, visual playground to learn how [Sigstore](https://sigstore.dev) works! Built with SolidJS and TypeScript.
 
@@ -26,7 +26,7 @@ Each component includes:
 - Fun facts
 
 ### Knowledge Quiz
-Test your understanding with 10 carefully crafted questions covering:
+Test your understanding with questions covering:
 - Keyless signing concepts
 - Certificate lifecycle
 - Transparency logs

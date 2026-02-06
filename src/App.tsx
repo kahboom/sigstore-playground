@@ -18,9 +18,9 @@ const App: Component = () => {
         <div class="gradient-orb orb-3" />
         <div class="grid-overlay" />
       </div>
-      
+
       <Header currentView={currentView()} onViewChange={setCurrentView} />
-      
+
       <main class="main-content">
         <Show when={currentView() === 'journey'}>
           <SigningJourney />
@@ -32,7 +32,7 @@ const App: Component = () => {
           <Quiz />
         </Show>
       </main>
-      
+
       <Footer />
     </div>
   );

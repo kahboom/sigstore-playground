@@ -30,4 +30,3 @@ updates:
            - "@vitejs/*"
            - "vite"
            - "vite-*"
-           - "@hey-api/*"
