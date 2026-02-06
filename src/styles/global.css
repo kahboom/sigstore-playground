@@ -6,7 +6,7 @@
   --bg-card: rgba(17, 24, 39, 0.7);
   --bg-card-hover: rgba(26, 35, 50, 0.9);
   
-  /* Vibrant accent colors - Sigstore themed */
+  /* Accent colors */
   --accent-purple: #a855f7;
   --accent-purple-glow: rgba(168, 85, 247, 0.4);
   --accent-cyan: #06b6d4;
@@ -127,20 +127,18 @@ body {
 }
 
 .orb-1 {
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 600px;
   background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
-  top: -150px;
-  right: -75px;
+  top: -200px;
+  right: -100px;
   animation-delay: 0s;
 }
 
 @media (min-width: 768px) {
   .orb-1 {
-    width: 500px;
-    height: 500px;
-    top: -200px;
-    right: -100px;
+    width: 600px;
+    height: 600px;
   }
 }
 
@@ -152,20 +150,18 @@ body {
 }
 
 .orb-2 {
-  width: 250px;
-  height: 250px;
+  width: 500px;
+  height: 500px;
   background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
-  bottom: -125px;
-  left: -75px;
+  bottom: -150px;
+  left: -100px;
   animation-delay: -7s;
 }
 
 @media (min-width: 768px) {
   .orb-2 {
-    width: 400px;
-    height: 400px;
-    bottom: -150px;
-    left: -100px;
+    width: 500px;
+    height: 500px;
   }
 }
 
@@ -177,8 +173,8 @@ body {
 }
 
 .orb-3 {
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 400px;
   background: radial-gradient(circle, var(--accent-green) 0%, transparent 70%);
   top: 40%;
   left: 50%;
@@ -188,8 +184,8 @@ body {
 
 @media (min-width: 768px) {
   .orb-3 {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
   }
 }
 
@@ -293,7 +289,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  padding: 0.75rem 1.5rem; /* Touch-friendly padding */
+  padding: 0.75rem 1.5rem; /* touch-friendly padding */
   min-height: 44px; /* iOS/Android minimum touch target */
   font-family: var(--font-display);
   font-weight: 500;

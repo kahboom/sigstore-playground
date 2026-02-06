@@ -2,6 +2,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  margin: calc(var(--spacing-md) * -1);
+}
+
+@media (min-width: 768px) {
+  .signing-journey {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .journey-header {
@@ -17,16 +26,28 @@
 }
 
 .journey-title {
-  font-size: 2.5rem;
+  font-size: 2.857rem; /* 40px at 14px base - matches main branch appearance */
   font-weight: 800;
   margin-bottom: var(--spacing-sm);
   letter-spacing: -0.02em;
 }
 
+@media (min-width: 768px) {
+  .journey-title {
+    font-size: 2.5rem; /* Standard size on desktop */
+  }
+}
+
 .journey-subtitle {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 1.25rem; /* Slightly larger on mobile for readability */
   max-width: 500px;
+}
+
+@media (min-width: 768px) {
+  .journey-subtitle {
+    font-size: 1.1rem;
+  }
 }
 
 .journey-controls {
