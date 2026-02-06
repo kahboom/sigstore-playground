@@ -96,6 +96,7 @@ export const SigningJourney: Component = () => {
   const [completedSteps, setCompletedSteps] = createSignal<Set<number>>(new Set());
   const [showParticles, setShowParticles] = createSignal(false);
   const [artifactHash, setArtifactHash] = createSignal('');
+  let flowContainerRef: HTMLDivElement | undefined;
   
   const generateHash = () => {
     const chars = '0123456789abcdef';
@@ -108,6 +109,22 @@ export const SigningJourney: Component = () => {
 
   onMount(() => {
     setArtifactHash(generateHash());
+  });
+
+  // Auto-scroll active step into view
+  createEffect(() => {
+    const step = currentStep();
+    if (flowContainerRef) {
+      const nodes = flowContainerRef.querySelectorAll('.flow-node');
+      const activeNode = nodes[step] as HTMLElement;
+      if (activeNode) {
+        activeNode.scrollIntoView({ 
+          behavior: 'smooth', 
+          inline: 'center', 
+          block: 'nearest' 
+        });
+      }
+    }
   });
 
   const advanceStep = () => {
@@ -183,7 +200,7 @@ export const SigningJourney: Component = () => {
       </div>
 
       {/* Visual Flow Diagram */}
-      <div class="flow-container">
+      <div class="flow-container" ref={flowContainerRef}>
         <div class="flow-diagram">
           <For each={STEPS}>
             {(s, index) => (
