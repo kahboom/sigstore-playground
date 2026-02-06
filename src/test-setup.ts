@@ -8,9 +8,8 @@ vi.mock('solid-motionone', () => ({
   Motion: new Proxy(
     {},
     {
-      get: () => (props: any) => {
-        const { children, ...rest } = props;
-        return children;
+      get: () => (props: { children?: JSX.Element }) => {
+        return props.children;
       },
     }
   ),

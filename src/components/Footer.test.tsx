@@ -178,7 +178,6 @@ describe('Footer', () => {
     });
   });
 
-  describe('Content Styling', () => {
   describe('Accessibility', () => {
     it('all links are accessible', () => {
       render(() => <Footer />);

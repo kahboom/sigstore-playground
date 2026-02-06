@@ -258,19 +258,19 @@ describe('ComponentExplorer', () => {
     it('shows key points section on mobile', () => {
       render(() => <ComponentExplorer />);
 
-      expect(screen.getByText('Key Points')).toBeInTheDocument();
+      expect(screen.getByText('✨ Key Points')).toBeInTheDocument();
     });
 
     it('shows how it works section on mobile', () => {
       render(() => <ComponentExplorer />);
 
-      expect(screen.getByText('How It Works')).toBeInTheDocument();
+      expect(screen.getByText('⚙️ How It Works')).toBeInTheDocument();
     });
 
     it('displays diagram on mobile', () => {
       render(() => <ComponentExplorer />);
 
-      expect(screen.getByText('How They Work Together')).toBeInTheDocument();
+      expect(screen.getByText('🔄 How They Work Together')).toBeInTheDocument();
     });
 
     it('renders external links on mobile', () => {
@@ -285,10 +285,10 @@ describe('ComponentExplorer', () => {
     it('renders all card sections for a component', () => {
       render(() => <ComponentExplorer />);
 
-      expect(screen.getByText('Key Points')).toBeInTheDocument();
-      expect(screen.getByText('How It Works')).toBeInTheDocument();
-      expect(screen.getByText('Real World Analogy')).toBeInTheDocument();
-      expect(screen.getByText('Fun Fact')).toBeInTheDocument();
+      expect(screen.getByText('✨ Key Points')).toBeInTheDocument();
+      expect(screen.getByText('⚙️ How It Works')).toBeInTheDocument();
+      expect(screen.getByText('💡 Real World Analogy')).toBeInTheDocument();
+      expect(screen.getByText('🎉 Fun Fact')).toBeInTheDocument();
     });
 
     it('displays numbered steps in How It Works section', () => {
