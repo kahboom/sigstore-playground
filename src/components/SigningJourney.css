@@ -78,38 +78,11 @@
   scrollbar-width: none;
 }
 
-/* Fade indicators on edges */
-.flow-container::before,
-.flow-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 40px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.flow-container::before {
-  left: 0;
-  background: linear-gradient(to right, var(--bg-primary) 0%, transparent 100%);
-}
-
-.flow-container::after {
-  right: 0;
-  background: linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);
-}
-
 @media (min-width: 768px) {
   .flow-container {
     justify-content: center;
     overflow-x: auto;
     scroll-snap-type: none;
-  }
-  
-  .flow-container::before,
-  .flow-container::after {
-    display: none;
   }
 }
 
