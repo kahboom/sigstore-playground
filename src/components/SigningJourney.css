@@ -57,32 +57,77 @@
 
 /* Flow Diagram */
 .flow-container {
-  overflow-x: visible; /* No scroll on mobile, let it wrap naturally */
+  overflow-x: auto; /* Horizontal scroll on mobile */
+  overflow-y: hidden;
   padding: var(--spacing-md) 0;
   display: flex;
-  justify-content: center; /* Center the diagram container */
+  justify-content: flex-start;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  position: relative;
+}
+
+/* Hide scrollbar but keep functionality */
+.flow-container::-webkit-scrollbar {
+  display: none;
+}
+
+.flow-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Fade indicators on edges */
+.flow-container::before,
+.flow-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.flow-container::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-primary) 0%, transparent 100%);
+}
+
+.flow-container::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);
 }
 
 @media (min-width: 768px) {
   .flow-container {
-    overflow-x: auto; /* Allow scroll on desktop if needed */
+    justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: none;
+  }
+  
+  .flow-container::before,
+  .flow-container::after {
+    display: none;
   }
 }
 
 .flow-diagram {
   display: flex;
-  flex-wrap: wrap; /* Wraps naturally on mobile - creates 2x2 or 3x2 grid */
+  flex-wrap: nowrap; /* Single horizontal row on mobile for carousel */
   align-items: center;
-  justify-content: center;
-  gap: var(--spacing-md);
-  max-width: 100%;
+  justify-content: flex-start;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+  min-width: max-content;
 }
 
 @media (min-width: 768px) {
   .flow-diagram {
-    flex-wrap: nowrap; /* Single horizontal row on desktop */
+    justify-content: center;
     gap: 0;
-    min-width: max-content;
+    padding: 0;
   }
 }
 
@@ -93,13 +138,16 @@
   gap: var(--spacing-sm);
   cursor: pointer;
   position: relative;
-  padding: var(--spacing-sm) var(--spacing-sm); /* Equal padding for centered alignment */
+  padding: var(--spacing-sm) var(--spacing-sm);
   transition: all var(--transition-base);
+  scroll-snap-align: center; /* Snap to center on carousel scroll */
+  flex-shrink: 0; /* Prevent shrinking in carousel */
 }
 
 @media (min-width: 768px) {
   .flow-node {
-    padding: var(--spacing-sm) var(--spacing-md); /* Restore horizontal padding on desktop */
+    padding: var(--spacing-sm) var(--spacing-md);
+    scroll-snap-align: none;
   }
 }
 
@@ -156,7 +204,7 @@
 }
 
 .flow-node-connector {
-  display: none; /* Hidden on mobile with flexbox wrap */
+  display: block; /* Always show connector on mobile for carousel */
   position: absolute;
   top: 50%;
   right: -50%;
@@ -169,7 +217,7 @@
 
 @media (min-width: 768px) {
   .flow-node-connector {
-    display: block; /* Show horizontal connector on desktop */
+    display: block;
   }
 }
 
