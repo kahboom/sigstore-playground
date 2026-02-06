@@ -11,7 +11,7 @@
     "format": "prettier --check src",
     "format:fix": "prettier --write src",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage --passWithNoTests"
   },
   "keywords": [
     "sigstore",
