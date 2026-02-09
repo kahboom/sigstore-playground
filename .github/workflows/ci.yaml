@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v5
       - name: Use Node.js
-        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5 # v6
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
           node-version: 22
           cache: npm
@@ -47,10 +47,10 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v5
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@2588666de8825e1e9dc4e2329a4c985457d55b32 # v3
+        uses: github/codeql-action/init@45cbd0c69e560cd9e7cd7f8c32362050c9b7ded2 # v3
         with:
           languages: javascript
           queries: security-extended,security-and-quality
           build-mode: none
       - name: Analyze with CodeQL
-        uses: github/codeql-action/analyze@2588666de8825e1e9dc4e2329a4c985457d55b32 # v3
+        uses: github/codeql-action/analyze@45cbd0c69e560cd9e7cd7f8c32362050c9b7ded2 # v3
