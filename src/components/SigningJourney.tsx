@@ -8,102 +8,8 @@ import {
   JSX,
 } from 'solid-js';
 import { Motion, Presence } from 'solid-motionone';
+import { JOURNEY_STEPS, type Step } from '../data/journeySteps';
 import './SigningJourney.css';
-
-interface Step {
-  id: number;
-  title: string;
-  description: string;
-  component:
-    | 'developer'
-    | 'oidc'
-    | 'fulcio'
-    | 'artifact'
-    | 'rekor'
-    | 'verifier';
-  details: string[];
-  action: string;
-}
-
-const STEPS: Step[] = [
-  {
-    id: 1,
-    title: 'Developer initiates signing',
-    description:
-      'You want to sign your software artifact to prove it came from you',
-    component: 'developer',
-    details: [
-      'Developer runs `cosign sign` on their artifact',
-      'Cosign generates an ephemeral key pair',
-      'Private key is never stored permanently',
-    ],
-    action: '🔑 Generate Key Pair',
-  },
-  {
-    id: 2,
-    title: 'Authenticate with OIDC',
-    description: 'Prove your identity using an existing identity provider',
-    component: 'oidc',
-    details: [
-      'Developer authenticates via GitHub, Google, or other OIDC provider',
-      'Receives an OIDC token proving identity',
-      'No need to manage long-lived signing keys!',
-    ],
-    action: '🎫 Get OIDC Token',
-  },
-  {
-    id: 3,
-    title: 'Request certificate from Fulcio',
-    description: 'Fulcio issues a short-lived signing certificate',
-    component: 'fulcio',
-    details: [
-      'Cosign sends public key + OIDC token to Fulcio',
-      'Fulcio verifies the OIDC token',
-      'Issues a certificate valid for ~10 minutes',
-      'Certificate binds your identity to your public key',
-    ],
-    action: '📜 Issue Certificate',
-  },
-  {
-    id: 4,
-    title: 'Sign the artifact',
-    description: 'Create a cryptographic signature using the private key',
-    component: 'artifact',
-    details: [
-      'Hash the artifact content',
-      'Sign the hash with the ephemeral private key',
-      'Attach the signature and certificate to the artifact',
-    ],
-    action: '✍️ Sign Artifact',
-  },
-  {
-    id: 5,
-    title: 'Record in Rekor transparency log',
-    description: 'Create an immutable, timestamped record of the signing event',
-    component: 'rekor',
-    details: [
-      'Signing event recorded in Rekor',
-      "Entry is append-only (can't be deleted)",
-      'Provides proof of when signing occurred',
-      'Anyone can audit the transparency log',
-    ],
-    action: '📋 Log Entry',
-  },
-  {
-    id: 6,
-    title: 'Verification complete!',
-    description: "Anyone can now verify your artifact's authenticity",
-    component: 'verifier',
-    details: [
-      'Verifier runs `cosign verify`',
-      'Checks signature against certificate',
-      'Validates certificate chain to Fulcio',
-      'Confirms entry exists in Rekor',
-      '✅ Artifact is verified!',
-    ],
-    action: '✅ Verify',
-  },
-];
 
 export const SigningJourney: Component = () => {
   const [currentStep, setCurrentStep] = createSignal(0);
@@ -146,12 +52,12 @@ export const SigningJourney: Component = () => {
 
   const advanceStep = () => {
     const current = currentStep();
-    if (current < STEPS.length) {
+    if (current < JOURNEY_STEPS.length) {
       setCompletedSteps(prev => new Set([...prev, current]));
       setShowParticles(true);
       setTimeout(() => setShowParticles(false), 1000);
 
-      if (current < STEPS.length - 1) {
+      if (current < JOURNEY_STEPS.length - 1) {
         // delay before advancing to let the user see the success state
         setTimeout(() => setCurrentStep(current + 1), 1200);
       }
@@ -169,7 +75,7 @@ export const SigningJourney: Component = () => {
     setIsPlaying(true);
     resetJourney();
 
-    for (let i = 0; i < STEPS.length; i++) {
+    for (let i = 0; i < JOURNEY_STEPS.length; i++) {
       await new Promise(resolve => setTimeout(resolve, 2000));
       if (!isPlaying()) break;
       advanceStep();
@@ -189,7 +95,7 @@ export const SigningJourney: Component = () => {
     return icons[component];
   };
 
-  const step = () => STEPS[currentStep()];
+  const step = () => JOURNEY_STEPS[currentStep()];
 
   return (
     <div class="signing-journey">
@@ -220,7 +126,7 @@ export const SigningJourney: Component = () => {
       {/* Visual Flow Diagram */}
       <div class="flow-container" ref={flowContainerRef}>
         <div class="flow-diagram">
-          <For each={STEPS}>
+          <For each={JOURNEY_STEPS}>
             {(s, index) => (
               <div
                 class={`flow-node ${currentStep() === index() ? 'active' : ''} ${completedSteps().has(index()) ? 'completed' : ''}`}
@@ -291,7 +197,7 @@ export const SigningJourney: Component = () => {
               >
                 <div class="step-header">
                   <span class="step-number">
-                    Step {step()!.id} of {STEPS.length}
+                    Step {step()!.id} of {JOURNEY_STEPS.length}
                   </span>
                   <span class={`step-badge ${step()!.component}`}>
                     {getComponentIcon(step()!.component)}{' '}
@@ -324,8 +230,8 @@ export const SigningJourney: Component = () => {
                     class="btn btn-primary action-btn"
                     onClick={advanceStep}
                     disabled={
-                      currentStep() === STEPS.length - 1 &&
-                      completedSteps().has(STEPS.length - 1)
+                      currentStep() === JOURNEY_STEPS.length - 1 &&
+                      completedSteps().has(JOURNEY_STEPS.length - 1)
                     }
                   >
                     {completedSteps().has(currentStep())
@@ -347,10 +253,10 @@ export const SigningJourney: Component = () => {
                       class="btn btn-ghost"
                       onClick={() =>
                         setCurrentStep(
-                          Math.min(STEPS.length - 1, currentStep() + 1)
+                          Math.min(JOURNEY_STEPS.length - 1, currentStep() + 1)
                         )
                       }
-                      disabled={currentStep() === STEPS.length - 1}
+                      disabled={currentStep() === JOURNEY_STEPS.length - 1}
                     >
                       Next →
                     </button>
@@ -374,7 +280,7 @@ export const SigningJourney: Component = () => {
         </div>
         <div class="artifact-status">
           <Show
-            when={completedSteps().has(STEPS.length - 1)}
+            when={completedSteps().has(JOURNEY_STEPS.length - 1)}
             fallback={
               <Show
                 when={completedSteps().has(3)}
@@ -571,3 +477,5 @@ const ComponentVisual: Component<ComponentVisualProps> = props => {
     </div>
   );
 };
+
+export default SigningJourney;

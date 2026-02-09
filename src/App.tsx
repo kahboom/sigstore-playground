@@ -1,9 +1,11 @@
-import { Component, createSignal, Show } from 'solid-js';
+import { Component, createSignal, Show, lazy, Suspense } from 'solid-js';
 import { Header } from './components/Header';
-import { SigningJourney } from './components/SigningJourney';
-import { ComponentExplorer } from './components/ComponentExplorer';
-import { Quiz } from './components/Quiz';
 import { Footer } from './components/Footer';
+import { LoadingSkeleton } from './components/LoadingSkeleton';
+
+const SigningJourney = lazy(() => import('./components/SigningJourney'));
+const ComponentExplorer = lazy(() => import('./components/ComponentExplorer'));
+const Quiz = lazy(() => import('./components/Quiz'));
 
 type View = 'journey' | 'explorer' | 'quiz';
 
@@ -22,15 +24,17 @@ const App: Component = () => {
       <Header currentView={currentView()} onViewChange={setCurrentView} />
 
       <main class="main-content">
-        <Show when={currentView() === 'journey'}>
-          <SigningJourney />
-        </Show>
-        <Show when={currentView() === 'explorer'}>
-          <ComponentExplorer />
-        </Show>
-        <Show when={currentView() === 'quiz'}>
-          <Quiz />
-        </Show>
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Show when={currentView() === 'journey'}>
+            <SigningJourney />
+          </Show>
+          <Show when={currentView() === 'explorer'}>
+            <ComponentExplorer />
+          </Show>
+          <Show when={currentView() === 'quiz'}>
+            <Quiz />
+          </Show>
+        </Suspense>
       </main>
 
       <Footer />
