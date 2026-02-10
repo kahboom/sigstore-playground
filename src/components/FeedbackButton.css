@@ -12,7 +12,7 @@
   align-items: center;
   gap: var(--spacing-xs);
   cursor: pointer;
-  z-index: 100;
+  z-index: 150;
   box-shadow: -2px 2px 12px rgba(0, 0, 0, 0.3);
   transition: all var(--transition-fast);
   color: white;
@@ -52,9 +52,10 @@
     border-radius: 50%;
     width: 56px;
     height: 56px;
-    padding: var(--spacing-sm);
+    padding: 0;
     writing-mode: horizontal-tb;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    justify-content: center;
   }
 
   .feedback-button:hover {
