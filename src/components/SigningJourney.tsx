@@ -13,7 +13,6 @@ import './SigningJourney.css';
 
 export const SigningJourney: Component = () => {
   const [currentStep, setCurrentStep] = createSignal(0);
-  const [isPlaying, setIsPlaying] = createSignal(false);
   const [completedSteps, setCompletedSteps] = createSignal<Set<number>>(
     new Set()
   );
@@ -69,19 +68,6 @@ export const SigningJourney: Component = () => {
     setCurrentStep(0);
     setCompletedSteps(new Set<number>());
     setArtifactHash(generateHash());
-    setIsPlaying(false);
-  };
-
-  const playJourney = async () => {
-    setIsPlaying(true);
-    resetJourney();
-
-    for (let i = 0; i < JOURNEY_STEPS.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      if (!isPlaying()) break;
-      advanceStep();
-    }
-    setIsPlaying(false);
   };
 
   const getComponentIcon = (component: Step['component']) => {
@@ -106,18 +92,12 @@ export const SigningJourney: Component = () => {
             <span class="text-gradient">The Sigstore Signing Journey</span>
           </h1>
           <p class="journey-subtitle">
-            Watch how keyless signing works, step by step. Click through or hit
-            play!
+            Watch how keyless signing works, step by step. Click through each
+            stage!
           </p>
         </div>
 
         <div class="journey-controls">
-          <button
-            class="btn btn-primary"
-            onClick={isPlaying() ? () => setIsPlaying(false) : playJourney}
-          >
-            {isPlaying() ? '⏸ Pause' : '▶ Auto Play'}
-          </button>
           <button class="btn btn-secondary" onClick={resetJourney}>
             Reset
           </button>
