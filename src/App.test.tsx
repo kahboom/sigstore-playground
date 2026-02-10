@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@solidjs/testing-library';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import App from './App';
 import { setViewport, VIEWPORTS } from './test-setup';
 
