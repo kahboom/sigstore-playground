@@ -1,5 +1,7 @@
 # Sigstore Playground
 
+[![codecov](https://codecov.io/gh/kahboom/sigstore-playground/graph/badge.svg)](https://codecov.io/gh/kahboom/sigstore-playground)
+
 An interactive, visual educational playground to learn how [Sigstore](https://sigstore.dev) works.
 
 ## Development
