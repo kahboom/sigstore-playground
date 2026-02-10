@@ -5,24 +5,26 @@
   transform: translateY(-50%);
   background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
   border: none;
-  border-radius: 8px 0 0 8px;
-  padding: var(--spacing-md) var(--spacing-sm);
+  border-radius: 6px 0 0 6px;
+  padding: var(--spacing-sm) 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: 6px;
   cursor: pointer;
   z-index: 150;
-  box-shadow: -2px 2px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.2);
   transition: all var(--transition-fast);
   color: white;
   writing-mode: vertical-rl;
   text-orientation: mixed;
+  opacity: 0.9;
 }
 
 .feedback-button:hover {
   transform: translateY(-50%) translateX(-4px);
-  box-shadow: -4px 4px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 1;
 }
 
 .feedback-button:active {
@@ -30,13 +32,14 @@
 }
 
 .feedback-icon {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   transform: rotate(90deg);
+  display: none;
 }
 
 .feedback-text {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -70,6 +73,7 @@
     width: 28px;
     height: 28px;
     transform: none;
+    display: block;
   }
 
   .feedback-text {
