@@ -84,11 +84,36 @@ Knowledge check with 10 multiple-choice questions covering:
 ### Commands
 
 ```bash
-npm install   # Install dependencies
-npm run dev   # Start dev server (http://localhost:5173)
-npm run build # Production build to dist/
-npm run preview # Preview production build
+npm install      # Install dependencies
+npm run dev      # Start dev server (http://localhost:5173)
+npm run build    # Production build to dist/
+npm run preview  # Preview production build
+npm run sbom     # Generate SBOM (Software Bill of Materials)
+npm run sbom:check # Generate SBOM with verification
 ```
+
+### Sigstore Integration
+
+This project practices what it teaches by using Sigstore for its own security:
+
+**Commit Signing:**
+- All commits are signed with [gitsign](https://github.com/sigstore/gitsign)
+- Uses keyless signing with OIDC authentication
+- Signatures logged to Rekor for transparency
+- Configured in `.git/config` with `commit.gpgsign`, `gpg.x509.program`, and `gpg.format`
+
+**SBOM Generation:**
+- Automated SBOM generation in CI/CD pipeline (see `.github/workflows/ci.yaml`)
+- Format: CycloneDX JSON via `npm sbom`
+- Signed with Cosign using keyless OIDC
+- Published as build artifacts for every CI run
+- Local generation available via `npm run sbom`
+
+**CI/CD Workflow:**
+1. Build and test the application
+2. Generate SBOM with npm's built-in SBOM generator
+3. Sign SBOM with Cosign (keyless, OIDC-based)
+4. Upload SBOM, signature, and certificate as artifacts
 
 ### File Conventions
 

@@ -12,7 +12,9 @@
     "format:fix": "prettier --write src",
     "test": "vitest",
     "coverage": "vitest run --coverage --passWithNoTests",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sbom": "npm sbom --sbom-format=cyclonedx --sbom-type=application > sbom.json",
+    "sbom:check": "npm run sbom && echo 'SBOM generated successfully'"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
