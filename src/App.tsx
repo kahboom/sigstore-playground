@@ -2,6 +2,9 @@ import { Component, createSignal, Show, lazy, Suspense } from 'solid-js';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { LoadingSkeleton } from './components/LoadingSkeleton';
+import { FeedbackButton } from './components/FeedbackButton';
+import { FeedbackModal } from './components/FeedbackModal';
+import { Feedback } from './components/Feedback';
 
 const SigningJourney = lazy(() => import('./components/SigningJourney'));
 const ComponentExplorer = lazy(() => import('./components/ComponentExplorer'));
@@ -11,6 +14,11 @@ type View = 'journey' | 'explorer' | 'quiz';
 
 const App: Component = () => {
   const [currentView, setCurrentView] = createSignal<View>('journey');
+  const [showFeedbackModal, setShowFeedbackModal] = createSignal(false);
+
+  const handleFeedbackSuccess = () => {
+    setShowFeedbackModal(false);
+  };
 
   return (
     <div class="app">
@@ -37,7 +45,16 @@ const App: Component = () => {
         </Suspense>
       </main>
 
-      <Footer />
+      <Footer onFeedbackClick={() => setShowFeedbackModal(true)} />
+
+      <FeedbackButton onClick={() => setShowFeedbackModal(true)} />
+
+      <FeedbackModal
+        show={showFeedbackModal()}
+        onClose={() => setShowFeedbackModal(false)}
+      >
+        <Feedback onSuccess={handleFeedbackSuccess} />
+      </FeedbackModal>
     </div>
   );
 };

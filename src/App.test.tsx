@@ -104,7 +104,7 @@ describe('App', () => {
       });
     });
 
-    it('allows navigating between all three views', async () => {
+    it('allows navigating between all four views', async () => {
       render(() => <App />);
 
       // journey (default)
