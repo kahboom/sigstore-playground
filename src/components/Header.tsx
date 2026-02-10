@@ -12,7 +12,7 @@ export const Header: Component<HeaderProps> = props => {
   return (
     <header class="header">
       <div class="header-content">
-        <div class="logo">
+        <div class="logo" onClick={() => props.onViewChange('journey')}>
           <div class="logo-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125 120">
               <path
