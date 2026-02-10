@@ -9,11 +9,13 @@ vi.mock('solid-motionone', () => ({
     {},
     {
       get: () => (props: { children?: JSX.Element }) => {
-        return props.children;
+        // eslint-disable-next-line solid/reactivity
+        return () => props.children;
       },
     }
   ),
-  Presence: (props: { children: JSX.Element }) => props.children,
+  // eslint-disable-next-line solid/reactivity
+  Presence: (props: { children: JSX.Element }) => () => props.children,
 }));
 
 // Mock scrollIntoView for jsdom

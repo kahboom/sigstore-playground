@@ -161,7 +161,7 @@
 
 .flow-node.active .flow-node-icon {
   background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
-  border-color: transparent;
+  border: 0;
   box-shadow: 0 0 30px var(--accent-purple-glow);
   animation: glow-pulse 2s ease-in-out infinite;
 }

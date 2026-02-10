@@ -33,6 +33,13 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.logo:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
 }
 
 .logo-icon {

@@ -22,7 +22,7 @@ describe('SigningJourney', () => {
       ).toBeInTheDocument();
       expect(
         screen.getByText(
-          /Watch how keyless signing works, step by step. Click through or hit play!/i
+          /Watch how keyless signing works, step by step. Click through each stage!/i
         )
       ).toBeInTheDocument();
     });
@@ -30,7 +30,6 @@ describe('SigningJourney', () => {
     it('displays control buttons', () => {
       render(() => <SigningJourney />);
 
-      expect(screen.getByText('▶ Auto Play')).toBeInTheDocument();
       expect(screen.getByText('Reset')).toBeInTheDocument();
     });
 
@@ -139,53 +138,6 @@ describe('SigningJourney', () => {
 
       const flowNodes = document.querySelectorAll('.flow-node');
       expect(flowNodes[0]).toHaveClass('completed');
-    });
-  });
-
-  describe('Auto Play Functionality', () => {
-    it('starts auto play when play button is clicked', async () => {
-      render(() => <SigningJourney />);
-
-      const playButton = screen.getByText('▶ Auto Play');
-      fireEvent.click(playButton);
-
-      // auto play resets first, so wait for that
-      await waitFor(() => {
-        expect(screen.getByText(/Step 1 of 6/i)).toBeInTheDocument();
-      });
-    });
-
-    it('stops auto play when pause button is clicked', async () => {
-      render(() => <SigningJourney />);
-
-      const playButton = screen.getByText('▶ Auto Play');
-      fireEvent.click(playButton);
-
-      // wait a bit then check for pause button
-      vi.advanceTimersByTime(100);
-
-      await waitFor(() => {
-        const pauseButton = screen.queryByText(/Pause/i);
-        if (pauseButton) {
-          fireEvent.click(pauseButton);
-        }
-      });
-
-      expect(screen.getByText('▶ Auto Play')).toBeInTheDocument();
-    });
-
-    it('advances through steps automatically during auto play', async () => {
-      render(() => <SigningJourney />);
-
-      const playButton = screen.getByText('▶ Auto Play');
-      fireEvent.click(playButton);
-
-      // just verify the journey is active - auto play resets and starts playing
-      await waitFor(() => {
-        // either we're on step 1 (reset) or progressing through
-        const journeyElement = document.querySelector('.signing-journey');
-        expect(journeyElement).toBeInTheDocument();
-      });
     });
   });
 
@@ -362,7 +314,6 @@ describe('SigningJourney', () => {
       setViewport(VIEWPORTS.mobile.width, VIEWPORTS.mobile.height);
       render(() => <SigningJourney />);
 
-      expect(screen.getByText('▶ Auto Play')).toBeInTheDocument();
       expect(screen.getByText('Reset')).toBeInTheDocument();
     });
 
@@ -452,34 +403,6 @@ describe('SigningJourney', () => {
       fireEvent.click(flowNodes[2]);
 
       expect(screen.getByText(/Step 3 of 6/i)).toBeInTheDocument();
-    });
-
-    it('maintains state when auto play is paused and resumed', async () => {
-      render(() => <SigningJourney />);
-
-      const playButton = screen.getByText('▶ Auto Play');
-      fireEvent.click(playButton);
-
-      vi.advanceTimersByTime(3000);
-
-      // try to find and click pause
-      await waitFor(
-        () => {
-          const pauseButton = screen.queryByText(/Pause/i);
-          if (pauseButton) {
-            fireEvent.click(pauseButton);
-          }
-        },
-        { timeout: 500 }
-      ).catch(() => {
-        // if pause button not found, that's ok for this test
-      });
-
-      // check we're past step 1
-      const stepText = screen.queryByText(/Step [2-6] of 6/i);
-      expect(
-        stepText || screen.queryByText(/Step 1 of 6/i)
-      ).toBeInTheDocument();
     });
   });
 });
