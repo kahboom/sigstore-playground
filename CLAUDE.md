@@ -105,15 +105,20 @@ This project practices what it teaches by using Sigstore for its own security:
 **SBOM Generation:**
 - Automated SBOM generation in CI/CD pipeline (see `.github/workflows/ci.yaml`)
 - Format: CycloneDX JSON via `npm sbom`
-- Signed with Cosign using keyless OIDC
-- Published as build artifacts for every CI run
+- Signed and stored using GitHub Attestations (Sigstore-based)
+- Cryptographically bound to build artifacts
 - Local generation available via `npm run sbom`
 
 **CI/CD Workflow:**
 1. Build and test the application
 2. Generate SBOM with npm's built-in SBOM generator
-3. Sign SBOM with Cosign (keyless, OIDC-based)
-4. Upload SBOM, signature, and certificate as artifacts
+3. Create attestation with GitHub Actions (uses Sigstore/Fulcio/Rekor)
+4. Store attestation in GitHub with cryptographic proof of provenance
+
+**Verification:**
+- Use GitHub CLI to verify attestations: `gh attestation verify`
+- Lists all attestations: `gh attestation list --owner kahboom --repo sigstore-playground`
+- Demonstrates complete supply chain transparency
 
 ### File Conventions
 

@@ -57,11 +57,11 @@ git config gpg.format x509
 
 ### SBOM Generation
 
-Software Bill of Materials (SBOM) is automatically generated in CI/CD:
+Software Bill of Materials (SBOM) is automatically generated and attested in CI/CD:
 - Format: CycloneDX JSON
 - Generated on every CI build
-- Signed with Cosign
-- Published as build artifacts
+- Signed with Sigstore via GitHub Attestations
+- Stored as cryptographically-signed attestations
 
 You can generate an SBOM locally with:
 ```bash
@@ -69,6 +69,24 @@ npm run sbom
 ```
 
 This creates `sbom.json` in CycloneDX format, listing all dependencies.
+
+#### Verifying SBOMs
+
+Anyone can verify the SBOM attestations using the GitHub CLI:
+
+```bash
+# List all attestations
+gh attestation list --owner kahboom --repo sigstore-playground
+
+# Verify SBOM attestation
+gh attestation verify sbom.json \
+  --owner kahboom \
+  --repo sigstore-playground
+```
+
+Requirements:
+- [GitHub CLI](https://cli.github.com) (`brew install gh`)
+- Authenticated to GitHub (`gh auth login`)
 
 ## License
 
