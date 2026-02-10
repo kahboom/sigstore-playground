@@ -1,10 +1,4 @@
-import {
-  Component,
-  Show,
-  JSX,
-  onCleanup,
-  createEffect,
-} from 'solid-js';
+import { Component, Show, JSX, onCleanup, createEffect } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import { Motion, Presence } from 'solid-motionone';
 import './FeedbackModal.css';
