@@ -1,90 +1,73 @@
 # Sigstore Playground
 
-[![codecov](https://codecov.io/gh/kahboom/sigstore-playground/graph/badge.svg)](https://codecov.io/gh/kahboom/sigstore-playground)
+An interactive, visual educational playground to learn how [Sigstore](https://sigstore.dev) works.
 
-An interactive, visual playground to learn how [Sigstore](https://sigstore.dev) works! Built with SolidJS and TypeScript.
-
-## Features
-
-### Signing Journey
-Step through the entire Sigstore signing flow with beautiful animations:
-- Watch how keyless signing works step-by-step
-- Interactive controls to pause, play, and navigate
-- Visual representations of each component (Cosign, Fulcio, Rekor, OIDC)
-
-### Component Explorer
-Deep dive into each piece of the Sigstore ecosystem:
-- **Cosign** - The signing Swiss army knife
-- **Fulcio** - Identity-based certificate authority
-- **Rekor** - Immutable transparency log
-- **OIDC Providers** - Your existing identity for signing
-
-Each component includes:
-- Key points and features
-- Step-by-step how it works
-- Real-world analogies
-- Fun facts
-
-### Knowledge Quiz
-Test your understanding with questions covering:
-- Keyless signing concepts
-- Certificate lifecycle
-- Transparency logs
-- Verification workflow
-
-## Getting Started
+## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Start dev server
 npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
 ```
 
 ## Testing
 
-This project uses [Vitest](https://vitest.dev/) for testing with comprehensive coverage of all components.
+All code is linted, formatted, and tested automatically before each commit via pre-commit hooks.
 
-### Run Tests
+### Manual Commands
 
 ```bash
-# Run tests in watch mode
-npm test
-
-# Run tests once
-npm run test -- --run
-
-# Run tests with coverage report
-npm run coverage
+npm run lint          # Check for linting errors
+npm run format        # Check formatting
+npm run format:fix    # Fix formatting issues
+npm test              # Run tests in watch mode
+npm run coverage      # Run tests with coverage report
+npm run sbom          # Generate SBOM (Software Bill of Materials)
+npm run sbom:check    # Generate SBOM with verification message
 ```
 
-### Test Coverage
+## Pre-commit Hook
 
-Test coverage includes:
-- Component rendering and behavior
-- User interactions and navigation  
-- Mobile responsiveness (375px, 768px, 1024px viewports)
-- Edge cases and error states
+This project uses [Husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/lint-staged/lint-staged) to automatically:
 
-Coverage reports are automatically uploaded to [Codecov](https://codecov.io/gh/kahboom/sigstore-playground) on every push.
+1. **Lint** staged files with ESLint (and auto-fix when possible)
+2. **Format** staged files with Prettier
+3. **Test** only the files related to your changes
 
-## Tech Stack
+This ensures code quality and prevents broken commits from entering the repository.
 
-- **[SolidJS](https://www.solidjs.com/)** - Reactive UI framework
-- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
-- **[Vite](https://vitejs.dev/)** - Build tool
-- **[solid-motionone](https://github.com/solidjs-community/solid-motionone)** - Animations
+## Sigstore Integration
 
-## Learn More About Sigstore
+This project practices what it teaches by using Sigstore for its own security:
 
-- [Sigstore Documentation](https://docs.sigstore.dev)
-- [Sigstore Blog](https://blog.sigstore.dev)
-- [GitHub Organization](https://github.com/sigstore)
-- [Slack Community](https://slack.sigstore.dev)
+### Commit Signing with Gitsign
+
+All commits are signed using [gitsign](https://github.com/sigstore/gitsign), providing keyless commit signing with:
+- OIDC-based identity verification
+- Transparency via Rekor logging
+- No long-lived keys to manage
+
+The repository is configured with:
+```bash
+git config commit.gpgsign true
+git config gpg.x509.program gitsign
+git config gpg.format x509
+```
+
+### SBOM Generation
+
+Software Bill of Materials (SBOM) is automatically generated in CI/CD:
+- Format: CycloneDX JSON
+- Generated on every CI build
+- Signed with Cosign
+- Published as build artifacts
+
+You can generate an SBOM locally with:
+```bash
+npm run sbom
+```
+
+This creates `sbom.json` in CycloneDX format, listing all dependencies.
+
+## License
+
+MIT

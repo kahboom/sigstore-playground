@@ -1,0 +1,2 @@
+# Run lint-staged for changed files
+npx lint-staged

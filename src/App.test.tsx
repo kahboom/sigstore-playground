@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@solidjs/testing-library';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import App from './App';
 import { setViewport, VIEWPORTS } from './test-setup';
 
@@ -104,7 +104,7 @@ describe('App', () => {
       });
     });
 
-    it('allows navigating between all three views', async () => {
+    it('allows navigating between all four views', async () => {
       render(() => <App />);
 
       // journey (default)
@@ -412,6 +412,170 @@ describe('App', () => {
           screen.getByText(/The Sigstore Signing Journey/i)
         ).toBeInTheDocument();
       });
+    });
+  });
+
+  describe('Feedback System', () => {
+    beforeEach(() => {
+      // mock fetch for feedback form
+      globalThis.fetch = vi.fn();
+    });
+
+    it('renders FeedbackButton', () => {
+      render(() => <App />);
+
+      const feedbackButton = screen.getByLabelText(/Open feedback form/i);
+      expect(feedbackButton).toBeInTheDocument();
+    });
+
+    it('feedback modal is initially hidden', () => {
+      render(() => <App />);
+
+      expect(screen.queryByText('Share Your Feedback')).not.toBeInTheDocument();
+    });
+
+    it('opens feedback modal when FeedbackButton is clicked', async () => {
+      render(() => <App />);
+
+      const feedbackButton = screen.getByLabelText(/Open feedback form/i);
+      fireEvent.click(feedbackButton);
+
+      await waitFor(() => {
+        expect(screen.getByText('Share Your Feedback')).toBeInTheDocument();
+      });
+    });
+
+    it('opens feedback modal when footer feedback link is clicked', async () => {
+      render(() => <App />);
+
+      const feedbackLink = document.querySelector('.feedback-link');
+      expect(feedbackLink).toBeInTheDocument();
+      fireEvent.click(feedbackLink!);
+
+      await waitFor(() => {
+        expect(screen.getByText('Share Your Feedback')).toBeInTheDocument();
+      });
+    });
+
+    it('closes feedback modal when close button is clicked', async () => {
+      render(() => <App />);
+
+      // open modal
+      const feedbackButton = screen.getByLabelText(/Open feedback form/i);
+      fireEvent.click(feedbackButton);
+
+      await waitFor(() => {
+        expect(screen.getByText('Share Your Feedback')).toBeInTheDocument();
+      });
+
+      // close modal
+      const closeButton = screen.getByRole('button', {
+        name: /Close feedback modal/i,
+      });
+      fireEvent.click(closeButton);
+
+      await waitFor(() => {
+        expect(
+          screen.queryByText('Share Your Feedback')
+        ).not.toBeInTheDocument();
+      });
+    });
+
+    it('closes feedback modal after successful form submission', async () => {
+      (globalThis.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        ok: true,
+        headers: {
+          get: () => 'application/json',
+        },
+      });
+
+      render(() => <App />);
+
+      // open modal
+      const feedbackButton = screen.getByLabelText(/Open feedback form/i);
+      fireEvent.click(feedbackButton);
+
+      await waitFor(() => {
+        expect(screen.getByText('Share Your Feedback')).toBeInTheDocument();
+      });
+
+      // fill and submit form
+      fireEvent.input(screen.getByPlaceholderText(/Your name/i), {
+        target: { value: 'John Doe' },
+      });
+      fireEvent.input(
+        screen.getByPlaceholderText(/your\.email@example\.com/i),
+        {
+          target: { value: 'john@example.com' },
+        }
+      );
+      fireEvent.click(screen.getByRole('button', { name: /Submit Feedback/i }));
+
+      // modal should close after successful submission
+      await waitFor(() => {
+        expect(
+          screen.queryByText('Share Your Feedback')
+        ).not.toBeInTheDocument();
+      });
+    });
+
+    it('keeps modal open if form submission fails', async () => {
+      (globalThis.fetch as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
+        new Error('Network error')
+      );
+
+      render(() => <App />);
+
+      // open modal
+      const feedbackButton = screen.getByLabelText(/Open feedback form/i);
+      fireEvent.click(feedbackButton);
+
+      await waitFor(() => {
+        expect(screen.getByText('Share Your Feedback')).toBeInTheDocument();
+      });
+
+      // fill and submit form
+      fireEvent.input(screen.getByPlaceholderText(/Your name/i), {
+        target: { value: 'John Doe' },
+      });
+      fireEvent.input(
+        screen.getByPlaceholderText(/your\.email@example\.com/i),
+        {
+          target: { value: 'john@example.com' },
+        }
+      );
+      fireEvent.click(screen.getByRole('button', { name: /Submit Feedback/i }));
+
+      // modal should stay open and show error
+      await waitFor(() => {
+        expect(screen.getByText('Share Your Feedback')).toBeInTheDocument();
+        expect(
+          screen.getByText(/Failed to submit feedback. Please try again./i)
+        ).toBeInTheDocument();
+      });
+    });
+
+    it('feedback button remains visible across view changes', () => {
+      render(() => <App />);
+
+      // check on journey view
+      expect(screen.getByLabelText(/Open feedback form/i)).toBeInTheDocument();
+
+      const buttons = document.querySelectorAll('.nav-btn');
+
+      // check on explorer view
+      const explorerButton = Array.from(buttons).find(
+        btn => btn.textContent === 'Component Explorer'
+      ) as HTMLElement;
+      fireEvent.click(explorerButton!);
+      expect(screen.getByLabelText(/Open feedback form/i)).toBeInTheDocument();
+
+      // check on quiz view
+      const quizButton = Array.from(buttons).find(
+        btn => btn.textContent === 'Test Your Knowledge'
+      ) as HTMLElement;
+      fireEvent.click(quizButton!);
+      expect(screen.getByLabelText(/Open feedback form/i)).toBeInTheDocument();
     });
   });
 });

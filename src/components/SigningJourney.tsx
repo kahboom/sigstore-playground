@@ -33,11 +33,12 @@ export const SigningJourney: Component = () => {
     setArtifactHash(generateHash());
   });
 
-  // Auto-scroll active step into view
+  // auto-scroll active step into view
   createEffect(() => {
     const step = currentStep();
-    if (flowContainerRef) {
-      const nodes = flowContainerRef.querySelectorAll('.flow-node');
+    // use optional chaining to safely access the ref
+    const nodes = flowContainerRef?.querySelectorAll('.flow-node');
+    if (nodes && nodes.length > 0) {
       const activeNode = nodes[step] as HTMLElement;
       if (activeNode) {
         activeNode.scrollIntoView({

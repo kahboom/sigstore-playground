@@ -1,7 +1,11 @@
 import { Component } from 'solid-js';
 import './Footer.css';
 
-export const Footer: Component = () => {
+interface FooterProps {
+  onFeedbackClick: () => void;
+}
+
+export const Footer: Component<FooterProps> = props => {
   return (
     <footer class="footer">
       <div class="footer-content">
@@ -37,6 +41,17 @@ export const Footer: Component = () => {
               rel="noopener noreferrer"
             >
               Slack
+            </a>
+            <span class="divider">•</span>
+            <a
+              href="#"
+              onClick={e => {
+                e.preventDefault();
+                props.onFeedbackClick();
+              }}
+              class="feedback-link"
+            >
+              Feedback
             </a>
           </div>
         </div>
