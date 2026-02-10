@@ -52,7 +52,7 @@ describe('Feedback', () => {
       render(() => <Feedback onSuccess={mockOnSuccess} />);
 
       const requiredIndicators = screen.getAllByText('*');
-      expect(requiredIndicators.length).toBeGreaterThanOrEqual(3); // name, email, helpfulness
+      expect(requiredIndicators.length).toBeGreaterThanOrEqual(2); // name, email
     });
 
     it('displays optional indicators', () => {
@@ -60,7 +60,7 @@ describe('Feedback', () => {
       render(() => <Feedback onSuccess={mockOnSuccess} />);
 
       const optionalIndicators = screen.getAllByText('(optional)');
-      expect(optionalIndicators.length).toBe(2); // reason and comment fields
+      expect(optionalIndicators.length).toBe(3); // helpfulness, reason, and comment fields
     });
   });
 
@@ -131,8 +131,15 @@ describe('Feedback', () => {
       expect(mockOnSuccess).not.toHaveBeenCalled();
     });
 
-    it('shows error when submitting without helpfulness selection', async () => {
+    it('submits successfully without helpfulness selection (optional field)', async () => {
       const mockOnSuccess = vi.fn();
+      (globalThis.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        ok: true,
+        headers: {
+          get: () => 'application/json',
+        },
+      });
+
       render(() => <Feedback onSuccess={mockOnSuccess} />);
 
       const nameInput = screen.getByPlaceholderText(/Your name/i);
@@ -149,12 +156,8 @@ describe('Feedback', () => {
       fireEvent.click(submitButton);
 
       await waitFor(() => {
-        expect(
-          screen.getByText(/Please select whether this was helpful/i)
-        ).toBeInTheDocument();
+        expect(mockOnSuccess).toHaveBeenCalledTimes(1);
       });
-
-      expect(mockOnSuccess).not.toHaveBeenCalled();
     });
   });
 
