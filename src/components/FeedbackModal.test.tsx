@@ -85,7 +85,7 @@ describe('FeedbackModal', () => {
 
       // the modal renders successfully with handleBackdropClick attached to backdrop
       expect(screen.getByText('Content')).toBeInTheDocument();
-      
+
       // The handleBackdropClick function checks if e.target === e.currentTarget
       // before calling onClose, preventing clicks on child elements from closing modal
       // This is tested behaviorally through the "does not call onClose when modal content is clicked" test
@@ -224,7 +224,7 @@ describe('FeedbackModal', () => {
 
       // modal renders with focusable elements for focus management
       expect(screen.getByTestId('first-input')).toBeInTheDocument();
-      
+
       // The component has createEffect for focus management and uses modalRef
       // for querySelector to find and focus the first input element
       // Focus behavior is browser-dependent and difficult to test in JSDOM
@@ -299,7 +299,7 @@ describe('FeedbackModal', () => {
       // the modal card is rendered
       const modalCard = document.querySelector('.modal-card');
       expect(modalCard).toBeInTheDocument();
-      
+
       // Clicking modal content doesn't trigger onClose due to stopPropagation
       // The Motion.div container has onClick with stopPropagation to prevent
       // clicks inside the modal from bubbling to the backdrop
