@@ -37,7 +37,7 @@ This ensures code quality and prevents broken commits from entering the reposito
 
 ## Sigstore Integration
 
-This project practices what it teaches by using Sigstore for security:
+This project practices what it teaches by using Sigstore for its own security:
 
 ### Commit Signing with Gitsign
 
