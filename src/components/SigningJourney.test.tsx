@@ -404,6 +404,5 @@ describe('SigningJourney', () => {
 
       expect(screen.getByText(/Step 3 of 6/i)).toBeInTheDocument();
     });
-
   });
 });
