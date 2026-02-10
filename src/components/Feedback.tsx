@@ -14,6 +14,8 @@ export const Feedback: Component<FeedbackProps> = props => {
   const [isSubmitting, setIsSubmitting] = createSignal(false);
   const [error, setError] = createSignal<string>('');
 
+  // Handler for form submission
+
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
 
