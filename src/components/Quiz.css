@@ -71,6 +71,7 @@
 /* Question Card */
 .question-card {
   padding: var(--spacing-2xl);
+  transition: none !important; /* prevent CSS transition conflict with Motion animations */
 }
 
 .question-header {
