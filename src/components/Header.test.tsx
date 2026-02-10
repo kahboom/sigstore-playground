@@ -24,18 +24,19 @@ describe('Header', () => {
     expect(screen.getByText('Test Your Knowledge')).toBeInTheDocument();
   });
 
-  it('renders GitHub link', () => {
+  it('renders GitHub link with Octocat icon', () => {
     const mockViewChange = vi.fn();
     render(() => (
       <Header currentView="journey" onViewChange={mockViewChange} />
     ));
 
-    const githubLink = screen.getByText('GitHub');
+    const githubLink = screen.getByLabelText('View on GitHub');
     expect(githubLink).toBeInTheDocument();
-    expect(githubLink.closest('a')).toHaveAttribute(
+    expect(githubLink).toHaveAttribute(
       'href',
       'https://github.com/kahboom/sigstore-playground'
     );
+    expect(githubLink.querySelector('svg')).toBeInTheDocument();
   });
 
   it('applies active class to current view button', () => {

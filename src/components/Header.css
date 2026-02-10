@@ -148,8 +148,29 @@
   font-size: 1rem;
 }
 
-.docs-link {
-  font-size: 0.875rem;
+.github-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+.github-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.github-link svg {
+  width: 24px;
+  height: 24px;
 }
 
 @media (max-width: 900px) {
