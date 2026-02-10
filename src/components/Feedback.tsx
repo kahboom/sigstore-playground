@@ -34,11 +34,6 @@ export const Feedback: Component<FeedbackProps> = props => {
       return;
     }
 
-    if (!helpfulness()) {
-      setError('Please select whether this was helpful');
-      return;
-    }
-
     setIsSubmitting(true);
     setError('');
 
@@ -150,7 +145,7 @@ export const Feedback: Component<FeedbackProps> = props => {
         <div class="form-group">
           <label class="form-label">
             Did you find this playground helpful?
-            <span class="required">*</span>
+            <span class="optional">(optional)</span>
           </label>
           <div class="radio-group">
             <label class="radio-option">
@@ -186,20 +181,19 @@ export const Feedback: Component<FeedbackProps> = props => {
           </div>
         </div>
 
-        {/* Question 2: Reason for Learning */}
         <div class="form-group">
           <label class="form-label" for="reason">
             Why are you learning about Sigstore?
             <span class="optional">(optional)</span>
           </label>
-          <textarea
+          <input
             id="reason"
             name="reason"
-            class="form-textarea"
+            type="text"
+            class="form-input"
             placeholder="e.g., For my job, personal project, security research, curiosity..."
             value={reason()}
             onInput={e => setReason(e.currentTarget.value)}
-            rows={3}
           />
         </div>
 
