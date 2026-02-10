@@ -131,6 +131,31 @@ describe('Feedback', () => {
       expect(mockOnSuccess).not.toHaveBeenCalled();
     });
 
+    it('shows error when email is invalid', async () => {
+      const mockOnSuccess = vi.fn();
+      render(() => <Feedback onSuccess={mockOnSuccess} />);
+
+      const nameInput = screen.getByPlaceholderText(/Your name/i);
+      fireEvent.input(nameInput, { target: { value: 'John Doe' } });
+
+      const emailInput = screen.getByPlaceholderText(
+        /your\.email@example\.com/i
+      );
+      // use an email format that passes HTML5 validation but fails our regex
+      fireEvent.input(emailInput, { target: { value: 'invalid@email' } });
+
+      const form = document.querySelector('form[name="feedback"]');
+      fireEvent.submit(form!);
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Please enter a valid email address/i)
+        ).toBeInTheDocument();
+      });
+
+      expect(mockOnSuccess).not.toHaveBeenCalled();
+    });
+
     it('submits successfully without helpfulness selection (optional field)', async () => {
       const mockOnSuccess = vi.fn();
       (globalThis.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
@@ -362,6 +387,74 @@ describe('Feedback', () => {
       await waitFor(() => {
         expect(mockOnSuccess).toHaveBeenCalled();
       });
+    });
+
+    it('shows error when response is HTML (form not configured)', async () => {
+      const mockOnSuccess = vi.fn();
+      (globalThis.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        ok: true,
+        headers: {
+          get: () => 'text/html',
+        },
+      });
+
+      render(() => <Feedback onSuccess={mockOnSuccess} />);
+
+      fireEvent.input(screen.getByPlaceholderText(/Your name/i), {
+        target: { value: 'John Doe' },
+      });
+      fireEvent.input(
+        screen.getByPlaceholderText(/your\.email@example\.com/i),
+        {
+          target: { value: 'john@example.com' },
+        }
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /Submit Feedback/i }));
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(
+            /Form submission is not properly configured. Please contact support./i
+          )
+        ).toBeInTheDocument();
+      });
+
+      expect(mockOnSuccess).not.toHaveBeenCalled();
+    });
+
+    it('shows error when response is not ok', async () => {
+      const mockOnSuccess = vi.fn();
+      (globalThis.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
+        ok: false,
+        headers: {
+          get: () => 'application/json',
+        },
+      });
+
+      render(() => <Feedback onSuccess={mockOnSuccess} />);
+
+      fireEvent.input(screen.getByPlaceholderText(/Your name/i), {
+        target: { value: 'John Doe' },
+      });
+      fireEvent.input(
+        screen.getByPlaceholderText(/your\.email@example\.com/i),
+        {
+          target: { value: 'john@example.com' },
+        }
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /Submit Feedback/i }));
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(
+            /Form submission is not properly configured. Please contact support./i
+          )
+        ).toBeInTheDocument();
+      });
+
+      expect(mockOnSuccess).not.toHaveBeenCalled();
     });
   });
 
