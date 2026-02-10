@@ -7,7 +7,7 @@ export default defineConfig({
     solidPlugin(),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
-      bundleName: "sigstore-playground",
+      bundleName: 'sigstore-playground',
       uploadToken: process.env.CODECOV_TOKEN,
     }),
   ],
@@ -16,5 +16,14 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
+    cssCodeSplit: true, // split CSS per lazy-loaded chunk
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // separate animation libraries into their own chunk
+          'solid-motion': ['solid-motionone', 'motion'],
+        },
+      },
+    },
   },
 });

@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@solidjs/testing-library';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { ComponentExplorer } from './ComponentExplorer';
+import ComponentExplorer from './ComponentExplorer';
 import { setViewport, VIEWPORTS } from '../test-setup';
 
 describe('ComponentExplorer', () => {

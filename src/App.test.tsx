@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@solidjs/testing-library';
+import { render, screen, fireEvent, waitFor } from '@solidjs/testing-library';
 import { describe, it, expect } from 'vitest';
 import App from './App';
 import { setViewport, VIEWPORTS } from './test-setup';
@@ -18,12 +18,14 @@ describe('App', () => {
       expect(screen.getByText('Sigstore.dev')).toBeInTheDocument();
     });
 
-    it('displays Signing Journey view by default', () => {
+    it('displays Signing Journey view by default', async () => {
       render(() => <App />);
 
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
     });
 
     it('renders background effects', () => {
@@ -38,7 +40,7 @@ describe('App', () => {
   });
 
   describe('View Navigation', () => {
-    it('switches to Component Explorer when explorer button is clicked', () => {
+    it('switches to Component Explorer when explorer button is clicked', async () => {
       render(() => <App />);
 
       const buttons = screen.getAllByRole('button');
@@ -49,12 +51,16 @@ describe('App', () => {
       );
       fireEvent.click(explorerButton!);
 
-      expect(
-        screen.getByText(/Deep dive into each piece of the Sigstore ecosystem/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(
+            /Deep dive into each piece of the Sigstore ecosystem/i
+          )
+        ).toBeInTheDocument();
+      });
     });
 
-    it('switches to Quiz when quiz button is clicked', () => {
+    it('switches to Quiz when quiz button is clicked', async () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
@@ -63,12 +69,14 @@ describe('App', () => {
       ) as HTMLElement;
       fireEvent.click(quizButton!);
 
-      expect(
-        screen.getByText(/How well do you understand Sigstore/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(/How well do you understand Sigstore/i)
+        ).toBeInTheDocument();
+      });
     });
 
-    it('switches back to Signing Journey from another view', () => {
+    it('switches back to Signing Journey from another view', async () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
@@ -78,56 +86,68 @@ describe('App', () => {
         btn => btn.textContent === 'Component Explorer'
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
-      expect(
-        screen.getByText('The Signing Swiss Army Knife')
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText('The Signing Swiss Army Knife')
+        ).toBeInTheDocument();
+      });
 
-      // Navigate back to journey
+      // navigate back to journey
       const journeyButton = Array.from(buttons).find(
         btn => btn.textContent === 'Signing Journey'
       ) as HTMLElement;
       fireEvent.click(journeyButton!);
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
     });
 
-    it('allows navigating between all three views', () => {
+    it('allows navigating between all three views', async () => {
       render(() => <App />);
 
-      // Journey (default)
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      // journey (default)
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
 
       const buttons = document.querySelectorAll('.nav-btn');
 
-      // To Explorer
+      // to explorer
       const explorerButton = Array.from(buttons).find(
         btn => btn.textContent === 'Component Explorer'
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
-      expect(
-        screen.getByText('The Signing Swiss Army Knife')
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText('The Signing Swiss Army Knife')
+        ).toBeInTheDocument();
+      });
 
-      // To Quiz
+      // to quiz
       const quizButton = Array.from(buttons).find(
         btn => btn.textContent === 'Test Your Knowledge'
       ) as HTMLElement;
       fireEvent.click(quizButton!);
-      expect(
-        screen.getByText(/How well do you understand Sigstore/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(/How well do you understand Sigstore/i)
+        ).toBeInTheDocument();
+      });
 
-      // Back to Journey
+      // back to journey
       const journeyButton = Array.from(buttons).find(
         btn => btn.textContent === 'Signing Journey'
       ) as HTMLElement;
       fireEvent.click(journeyButton!);
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
     });
   });
 
@@ -203,15 +223,17 @@ describe('App', () => {
   });
 
   describe('View Rendering', () => {
-    it('renders only one view at a time', () => {
+    it('renders only one view at a time', async () => {
       render(() => <App />);
 
-      // Should show journey
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      // should show journey
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
 
-      // Should not show explorer or quiz content
+      // should not show explorer or quiz content
       expect(
         screen.queryByText('The Signing Swiss Army Knife')
       ).not.toBeInTheDocument();
@@ -220,57 +242,67 @@ describe('App', () => {
       ).not.toBeInTheDocument();
     });
 
-    it('unmounts previous view when switching', () => {
+    it('unmounts previous view when switching', async () => {
       render(() => <App />);
 
-      // Start on journey
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      // start on journey
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
 
-      // Switch to explorer
+      // switch to explorer
       const buttons = document.querySelectorAll('.nav-btn');
       const explorerButton = Array.from(buttons).find(
         btn => btn.textContent === 'Component Explorer'
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
 
-      // Journey should be unmounted
-      expect(
-        screen.queryByText(/The Sigstore Signing Journey/i)
-      ).not.toBeInTheDocument();
+      // journey should be unmounted
+      await waitFor(() => {
+        expect(
+          screen.queryByText(/The Sigstore Signing Journey/i)
+        ).not.toBeInTheDocument();
+      });
     });
   });
 
   describe('Mobile Responsiveness', () => {
-    it('renders all views on mobile', () => {
+    it('renders all views on mobile', async () => {
       setViewport(VIEWPORTS.mobile.width, VIEWPORTS.mobile.height);
       render(() => <App />);
 
-      // Journey by default
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      // journey by default
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
 
       const buttons = document.querySelectorAll('.nav-btn');
 
-      // Switch to explorer
+      // switch to explorer
       const explorerButton = Array.from(buttons).find(
         btn => btn.textContent === 'Component Explorer'
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
-      expect(
-        screen.getByText('The Signing Swiss Army Knife')
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText('The Signing Swiss Army Knife')
+        ).toBeInTheDocument();
+      });
 
-      // Switch to quiz
+      // switch to quiz
       const quizButton = Array.from(buttons).find(
         btn => btn.textContent === 'Test Your Knowledge'
       ) as HTMLElement;
       fireEvent.click(quizButton!);
-      expect(
-        screen.getByText(/How well do you understand Sigstore/i)
-      ).toBeInTheDocument();
+      await waitFor(() => {
+        expect(
+          screen.getByText(/How well do you understand Sigstore/i)
+        ).toBeInTheDocument();
+      });
     });
 
     it('maintains header functionality on mobile', () => {
@@ -333,12 +365,12 @@ describe('App', () => {
   });
 
   describe('Edge Cases', () => {
-    it('handles rapid view switching', () => {
+    it('handles rapid view switching', async () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
 
-      // Rapidly switch between views
+      // rapidly switch between views
       const explorerButton = Array.from(buttons).find(
         btn => btn.textContent === 'Component Explorer'
       ) as HTMLElement;
@@ -354,13 +386,15 @@ describe('App', () => {
       fireEvent.click(journeyButton!);
       fireEvent.click(explorerButton!);
 
-      // Should end on Explorer
-      expect(
-        screen.getByText('The Signing Swiss Army Knife')
-      ).toBeInTheDocument();
+      // should end on explorer
+      await waitFor(() => {
+        expect(
+          screen.getByText('The Signing Swiss Army Knife')
+        ).toBeInTheDocument();
+      });
     });
 
-    it('maintains view state after clicking same view button', () => {
+    it('maintains view state after clicking same view button', async () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
@@ -368,14 +402,16 @@ describe('App', () => {
         btn => btn.textContent === 'Signing Journey'
       ) as HTMLElement;
 
-      // Click same button multiple times
+      // click same button multiple times
       fireEvent.click(journeyButton!);
       fireEvent.click(journeyButton!);
 
-      // Should still show journey
-      expect(
-        screen.getByText(/The Sigstore Signing Journey/i)
-      ).toBeInTheDocument();
+      // should still show journey
+      await waitFor(() => {
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
     });
   });
 });
