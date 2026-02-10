@@ -815,6 +815,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  transition: none !important; /* prevent CSS transition conflict with Motion animations */
 }
 
 .step-header {
