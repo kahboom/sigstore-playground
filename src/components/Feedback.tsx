@@ -54,20 +54,16 @@ export const Feedback: Component<FeedbackProps> = props => {
         ).toString(),
       });
 
-      // Check if the response is actually a successful form submission
-      // For Netlify Forms, a successful submission should not return HTML
-      const contentType = response.headers.get('content-type');
-      const isHtmlResponse = contentType?.includes('text/html');
-
-      if (response.ok && !isHtmlResponse) {
-        // Clear form
+      // Netlify Forms return 200 with HTML on successful submission
+      if (response.ok) {
+        // clear form
         setName('');
         setEmail('');
         setHelpfulness('');
         setReason('');
         setComment('');
 
-        // Call success callback (will close modal)
+        // call success callback (will close modal)
         props.onSuccess?.();
       } else {
         setError(
@@ -94,7 +90,7 @@ export const Feedback: Component<FeedbackProps> = props => {
 
       <form
         name="feedback"
-        method="POST"
+        method="post"
         data-netlify="true"
         netlify-honeypot="bot-field"
         onSubmit={handleSubmit}

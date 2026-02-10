@@ -389,7 +389,7 @@ describe('Feedback', () => {
       });
     });
 
-    it('shows error when response is HTML (form not configured)', async () => {
+    it('accepts HTML response from Netlify as successful submission', async () => {
       const mockOnSuccess = vi.fn();
       (globalThis.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: true,
@@ -413,14 +413,8 @@ describe('Feedback', () => {
       fireEvent.click(screen.getByRole('button', { name: /Submit Feedback/i }));
 
       await waitFor(() => {
-        expect(
-          screen.getByText(
-            /Form submission is not properly configured. Please contact support./i
-          )
-        ).toBeInTheDocument();
+        expect(mockOnSuccess).toHaveBeenCalled();
       });
-
-      expect(mockOnSuccess).not.toHaveBeenCalled();
     });
 
     it('shows error when response is not ok', async () => {
