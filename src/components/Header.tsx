@@ -54,7 +54,7 @@ export const Header: Component<HeaderProps> = props => {
             class={`nav-btn ${props.currentView === 'advanced' ? 'active' : ''}`}
             onClick={() => props.onViewChange('advanced')}
           >
-            🎓 Advanced Topics
+            Advanced
           </button>
         </nav>
 
