@@ -1036,7 +1036,11 @@
 /* Advanced Topics Teaser */
 .advanced-teaser {
   padding: var(--spacing-xl);
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(168, 85, 247, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1),
+    rgba(168, 85, 247, 0.1)
+  );
   border: 2px solid var(--border-subtle);
   border-radius: var(--radius-lg);
 }
