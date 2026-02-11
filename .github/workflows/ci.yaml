@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write  # required for Cosign OIDC signing
+      id-token: write  # required for GitHub Attestations
+      attestations: write  # required to write attestations
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v5
       - name: Use Node.js
@@ -42,18 +43,11 @@ jobs:
         run: npm run format
       - name: Generate SBOM
         run: npm sbom --sbom-format=cyclonedx --sbom-type=application > sbom.json
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
-      - name: Sign SBOM with Cosign
-        run: cosign sign-blob --yes sbom.json --output-signature sbom.json.sig --output-certificate sbom.json.pem
-      - name: Upload SBOM artifacts
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+      - name: Attest SBOM
+        uses: actions/attest-sbom@v1
         with:
-          name: sbom
-          path: |
-            sbom.json
-            sbom.json.sig
-            sbom.json.pem
+          subject-path: 'dist/'
+          sbom-path: 'sbom.json'
 
   codeql:
     runs-on: ubuntu-latest

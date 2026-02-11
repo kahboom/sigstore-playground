@@ -9,8 +9,9 @@ import { Feedback } from './components/Feedback';
 const SigningJourney = lazy(() => import('./components/SigningJourney'));
 const ComponentExplorer = lazy(() => import('./components/ComponentExplorer'));
 const Quiz = lazy(() => import('./components/Quiz'));
+const AdvancedConcepts = lazy(() => import('./components/AdvancedConcepts'));
 
-type View = 'journey' | 'explorer' | 'quiz';
+type View = 'journey' | 'explorer' | 'quiz' | 'advanced';
 
 const App: Component = () => {
   const [currentView, setCurrentView] = createSignal<View>('journey');
@@ -41,6 +42,9 @@ const App: Component = () => {
           </Show>
           <Show when={currentView() === 'quiz'}>
             <Quiz />
+          </Show>
+          <Show when={currentView() === 'advanced'}>
+            <AdvancedConcepts />
           </Show>
         </Suspense>
       </main>

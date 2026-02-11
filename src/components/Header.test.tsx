@@ -45,7 +45,10 @@ describe('Header', () => {
       <Header currentView="explorer" onViewChange={mockViewChange} />
     ));
 
-    const explorerButton = screen.getByText('Component Explorer');
+    const buttons = screen.getAllByRole('button');
+    const explorerButton = buttons.find(btn =>
+      btn.textContent?.includes('Component Explorer')
+    );
     expect(explorerButton).toHaveClass('active');
   });
 });
