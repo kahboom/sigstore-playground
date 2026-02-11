@@ -104,6 +104,22 @@ describe('App', () => {
       });
     });
 
+    it('switches to Advanced Concepts when advanced button is clicked', async () => {
+      render(() => <App />);
+
+      const buttons = document.querySelectorAll('.nav-btn');
+      const advancedButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Advanced')
+      ) as HTMLElement;
+      fireEvent.click(advancedButton!);
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Advanced Supply Chain Security/i)
+        ).toBeInTheDocument();
+      });
+    });
+
     it('allows navigating between all four views', async () => {
       render(() => <App />);
 
@@ -124,6 +140,17 @@ describe('App', () => {
       await waitFor(() => {
         expect(
           screen.getByText('The Signing Swiss Army Knife')
+        ).toBeInTheDocument();
+      });
+
+      // to advanced
+      const advancedButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Advanced')
+      ) as HTMLElement;
+      fireEvent.click(advancedButton!);
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Advanced Supply Chain Security/i)
         ).toBeInTheDocument();
       });
 
@@ -233,12 +260,15 @@ describe('App', () => {
         ).toBeInTheDocument();
       });
 
-      // should not show explorer or quiz content
+      // should not show explorer, quiz, or advanced content
       expect(
         screen.queryByText('The Signing Swiss Army Knife')
       ).not.toBeInTheDocument();
       expect(
         screen.queryByText(/How well do you understand Sigstore/i)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/Advanced Supply Chain Security/i)
       ).not.toBeInTheDocument();
     });
 
@@ -266,6 +296,39 @@ describe('App', () => {
         ).not.toBeInTheDocument();
       });
     });
+
+    it('switches to and from Advanced view correctly', async () => {
+      render(() => <App />);
+
+      const buttons = document.querySelectorAll('.nav-btn');
+
+      // switch to advanced
+      const advancedButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Advanced')
+      ) as HTMLElement;
+      fireEvent.click(advancedButton!);
+
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Advanced Supply Chain Security/i)
+        ).toBeInTheDocument();
+      });
+
+      // switch back to journey
+      const journeyButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Signing Journey')
+      ) as HTMLElement;
+      fireEvent.click(journeyButton!);
+
+      await waitFor(() => {
+        expect(
+          screen.queryByText(/Advanced Supply Chain Security/i)
+        ).not.toBeInTheDocument();
+        expect(
+          screen.getByText(/The Sigstore Signing Journey/i)
+        ).toBeInTheDocument();
+      });
+    });
   });
 
   describe('Mobile Responsiveness', () => {
@@ -290,6 +353,17 @@ describe('App', () => {
       await waitFor(() => {
         expect(
           screen.getByText('The Signing Swiss Army Knife')
+        ).toBeInTheDocument();
+      });
+
+      // switch to advanced
+      const advancedButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Advanced')
+      ) as HTMLElement;
+      fireEvent.click(advancedButton!);
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Advanced Supply Chain Security/i)
         ).toBeInTheDocument();
       });
 
@@ -568,6 +642,13 @@ describe('App', () => {
         btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
+      expect(screen.getByLabelText(/Open feedback form/i)).toBeInTheDocument();
+
+      // check on advanced view
+      const advancedButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Advanced')
+      ) as HTMLElement;
+      fireEvent.click(advancedButton!);
       expect(screen.getByLabelText(/Open feedback form/i)).toBeInTheDocument();
 
       // check on quiz view

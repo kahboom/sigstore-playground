@@ -214,9 +214,9 @@ export const AdvancedConcepts: Component = () => {
           {topic => (
             <Motion.div
               class="topic-content glass-card"
-              initial={{ opacity: 0, translateY: 20 }}
-              animate={{ opacity: 1, translateY: 0 }}
-              exit={{ opacity: 0, translateY: -20 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
               style={{ '--topic-color': topic.color }}
             >
