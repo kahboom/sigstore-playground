@@ -82,6 +82,7 @@
 /* Topic Content */
 .topic-content {
   padding: var(--spacing-xl);
+  transition: none !important; /* prevent CSS transition conflict with Motion animations */
 }
 
 .topic-title {
