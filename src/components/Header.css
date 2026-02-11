@@ -148,6 +148,10 @@
   font-size: 1rem;
 }
 
+.nav-btn-short {
+  display: none;
+}
+
 .github-link {
   display: flex;
   align-items: center;
@@ -173,7 +177,7 @@
   height: 24px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .header-content {
     flex-wrap: wrap;
     gap: var(--spacing-md);
@@ -191,6 +195,14 @@
     padding: 0.75rem var(--spacing-sm); /* Maintain 44px touch target */
     min-height: 44px;
     font-size: 0.8rem;
+  }
+
+  .nav-btn-full {
+    display: none;
+  }
+
+  .nav-btn-short {
+    display: inline;
   }
 }
 

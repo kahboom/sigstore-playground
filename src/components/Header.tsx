@@ -36,25 +36,29 @@ export const Header: Component<HeaderProps> = props => {
             class={`nav-btn ${props.currentView === 'journey' ? 'active' : ''}`}
             onClick={() => props.onViewChange('journey')}
           >
-            Signing Journey
+            <span class="nav-btn-full">Signing Journey</span>
+            <span class="nav-btn-short">Journey</span>
           </button>
           <button
             class={`nav-btn ${props.currentView === 'explorer' ? 'active' : ''}`}
             onClick={() => props.onViewChange('explorer')}
           >
-            Component Explorer
+            <span class="nav-btn-full">Component Explorer</span>
+            <span class="nav-btn-short">Explorer</span>
           </button>
           <button
             class={`nav-btn ${props.currentView === 'quiz' ? 'active' : ''}`}
             onClick={() => props.onViewChange('quiz')}
           >
-            Test Your Knowledge
+            <span class="nav-btn-full">Test Your Knowledge</span>
+            <span class="nav-btn-short">Quiz</span>
           </button>
           <button
             class={`nav-btn ${props.currentView === 'advanced' ? 'active' : ''}`}
             onClick={() => props.onViewChange('advanced')}
           >
-            Advanced
+            <span class="nav-btn-full">Advanced</span>
+            <span class="nav-btn-short">Advanced</span>
           </button>
         </nav>
 

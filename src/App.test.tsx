@@ -46,7 +46,7 @@ describe('App', () => {
       const buttons = screen.getAllByRole('button');
       const explorerButton = buttons.find(
         btn =>
-          btn.textContent === 'Component Explorer' &&
+          btn.textContent?.includes('Component Explorer') &&
           btn.classList.contains('nav-btn')
       );
       fireEvent.click(explorerButton!);
@@ -64,8 +64,8 @@ describe('App', () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
       fireEvent.click(quizButton!);
 
@@ -82,8 +82,8 @@ describe('App', () => {
       const buttons = document.querySelectorAll('.nav-btn');
 
       // Navigate to explorer
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
       await waitFor(() => {
@@ -93,8 +93,8 @@ describe('App', () => {
       });
 
       // navigate back to journey
-      const journeyButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Signing Journey'
+      const journeyButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Signing Journey')
       ) as HTMLElement;
       fireEvent.click(journeyButton!);
       await waitFor(() => {
@@ -117,8 +117,8 @@ describe('App', () => {
       const buttons = document.querySelectorAll('.nav-btn');
 
       // to explorer
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
       await waitFor(() => {
@@ -128,8 +128,8 @@ describe('App', () => {
       });
 
       // to quiz
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
       fireEvent.click(quizButton!);
       await waitFor(() => {
@@ -139,8 +139,8 @@ describe('App', () => {
       });
 
       // back to journey
-      const journeyButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Signing Journey'
+      const journeyButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Signing Journey')
       ) as HTMLElement;
       fireEvent.click(journeyButton!);
       await waitFor(() => {
@@ -156,8 +156,8 @@ describe('App', () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
-      const journeyButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Signing Journey'
+      const journeyButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Signing Journey')
       ) as HTMLElement;
       expect(journeyButton).toHaveClass('active');
     });
@@ -166,15 +166,15 @@ describe('App', () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
 
       expect(explorerButton).toHaveClass('active');
 
-      const journeyButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Signing Journey'
+      const journeyButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Signing Journey')
       ) as HTMLElement;
       expect(journeyButton).not.toHaveClass('active');
     });
@@ -186,14 +186,14 @@ describe('App', () => {
 
       const buttons = document.querySelectorAll('.nav-btn');
 
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
       expect(screen.getByText('Sigstore')).toBeInTheDocument();
 
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
       fireEvent.click(quizButton!);
       expect(screen.getByText('Sigstore')).toBeInTheDocument();
@@ -208,14 +208,14 @@ describe('App', () => {
 
       const buttons = document.querySelectorAll('.nav-btn');
 
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
       expect(screen.getByText('Sigstore.dev')).toBeInTheDocument();
 
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
       fireEvent.click(quizButton!);
       expect(screen.getByText('Sigstore.dev')).toBeInTheDocument();
@@ -254,8 +254,8 @@ describe('App', () => {
 
       // switch to explorer
       const buttons = document.querySelectorAll('.nav-btn');
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
 
@@ -283,8 +283,8 @@ describe('App', () => {
       const buttons = document.querySelectorAll('.nav-btn');
 
       // switch to explorer
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
       await waitFor(() => {
@@ -294,8 +294,8 @@ describe('App', () => {
       });
 
       // switch to quiz
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
       fireEvent.click(quizButton!);
       await waitFor(() => {
@@ -310,8 +310,8 @@ describe('App', () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
 
@@ -350,14 +350,14 @@ describe('App', () => {
 
       const buttons = document.querySelectorAll('.nav-btn');
 
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
       expect(mainContent).toBeInTheDocument();
 
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
       fireEvent.click(quizButton!);
       expect(mainContent).toBeInTheDocument();
@@ -371,14 +371,14 @@ describe('App', () => {
       const buttons = document.querySelectorAll('.nav-btn');
 
       // rapidly switch between views
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
-      const journeyButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Signing Journey'
+      const journeyButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Signing Journey')
       ) as HTMLElement;
 
       fireEvent.click(explorerButton!);
@@ -398,8 +398,8 @@ describe('App', () => {
       render(() => <App />);
 
       const buttons = document.querySelectorAll('.nav-btn');
-      const journeyButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Signing Journey'
+      const journeyButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Signing Journey')
       ) as HTMLElement;
 
       // click same button multiple times
@@ -564,15 +564,15 @@ describe('App', () => {
       const buttons = document.querySelectorAll('.nav-btn');
 
       // check on explorer view
-      const explorerButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Component Explorer'
+      const explorerButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Component Explorer')
       ) as HTMLElement;
       fireEvent.click(explorerButton!);
       expect(screen.getByLabelText(/Open feedback form/i)).toBeInTheDocument();
 
       // check on quiz view
-      const quizButton = Array.from(buttons).find(
-        btn => btn.textContent === 'Test Your Knowledge'
+      const quizButton = Array.from(buttons).find(btn =>
+        btn.textContent?.includes('Test Your Knowledge')
       ) as HTMLElement;
       fireEvent.click(quizButton!);
       expect(screen.getByLabelText(/Open feedback form/i)).toBeInTheDocument();
