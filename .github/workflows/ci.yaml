@@ -44,7 +44,7 @@ jobs:
       - name: Generate SBOM
         run: npm sbom --sbom-format=cyclonedx --sbom-type=application > sbom.json
       - name: Attest SBOM
-        uses: actions/attest-sbom@v1
+        uses: actions/attest-sbom@v4
         with:
           subject-path: 'dist/'
           sbom-path: 'sbom.json'
