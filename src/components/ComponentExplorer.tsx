@@ -1,7 +1,26 @@
 import { Component, createSignal, For, Show } from 'solid-js';
 import { Motion, Presence } from 'solid-motionone';
-import { SIGSTORE_COMPONENTS } from '../data/sigstoreComponents';
+import {
+  SIGSTORE_COMPONENTS,
+  type SigstoreComponent,
+} from '../data/sigstoreComponents';
 import './ComponentExplorer.css';
+
+function renderComponentIcon(component: SigstoreComponent) {
+  return component.iconImage ? (
+    <img src={component.iconImage} alt={component.name} />
+  ) : (
+    component.icon
+  );
+}
+
+function sigstoreComponentById(id: SigstoreComponent['id']): SigstoreComponent {
+  const c = SIGSTORE_COMPONENTS.find(x => x.id === id);
+  if (!c) {
+    throw new Error(`Unknown Sigstore component: ${id}`);
+  }
+  return c;
+}
 
 export const ComponentExplorer: Component = () => {
   const [selectedComponent, setSelectedComponent] =
@@ -31,7 +50,9 @@ export const ComponentExplorer: Component = () => {
               onClick={() => setSelectedComponent(component.id)}
               style={{ '--component-color': component.color }}
             >
-              <span class="component-btn-icon">{component.icon}</span>
+              <span class="component-btn-icon">
+                {renderComponentIcon(component)}
+              </span>
               <span class="component-btn-name">{component.name}</span>
             </button>
           )}
@@ -52,7 +73,7 @@ export const ComponentExplorer: Component = () => {
             >
               {/* Header Section */}
               <div class="details-header">
-                <div class="details-icon">{component.icon}</div>
+                <div class="details-icon">{renderComponentIcon(component)}</div>
                 <div class="details-title-section">
                   <h2 class="details-name">{component.name}</h2>
                   <p class="details-tagline">{component.tagline}</p>
@@ -137,7 +158,9 @@ export const ComponentExplorer: Component = () => {
             class={`diagram-node cosign-node ${selectedComponent() === 'cosign' ? 'highlighted' : ''}`}
             onClick={() => setSelectedComponent('cosign')}
           >
-            <span class="node-icon">✍️</span>
+            <span class="node-icon">
+              {renderComponentIcon(sigstoreComponentById('cosign'))}
+            </span>
             <span class="node-label">Cosign</span>
           </div>
 
@@ -159,7 +182,9 @@ export const ComponentExplorer: Component = () => {
                 class={`diagram-node fulcio-node ${selectedComponent() === 'fulcio' ? 'highlighted' : ''}`}
                 onClick={() => setSelectedComponent('fulcio')}
               >
-                <span class="node-icon">📜</span>
+                <span class="node-icon">
+                  {renderComponentIcon(sigstoreComponentById('fulcio'))}
+                </span>
                 <span class="node-label">Fulcio</span>
               </div>
             </div>
@@ -170,7 +195,9 @@ export const ComponentExplorer: Component = () => {
                 class={`diagram-node rekor-node ${selectedComponent() === 'rekor' ? 'highlighted' : ''}`}
                 onClick={() => setSelectedComponent('rekor')}
               >
-                <span class="node-icon">📋</span>
+                <span class="node-icon">
+                  {renderComponentIcon(sigstoreComponentById('rekor'))}
+                </span>
                 <span class="node-label">Rekor</span>
               </div>
             </div>

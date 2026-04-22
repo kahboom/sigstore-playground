@@ -1,7 +1,10 @@
+// TODO: Replace iconImage PNGs with hand-crafted SVGs for sharper rendering and smaller assets.
 export interface SigstoreComponent {
   id: string;
   name: string;
   icon: string;
+  /** Public URL under /public, e.g. '/assets/cosign.png' */
+  iconImage?: string;
   color: string;
   tagline: string;
   description: string;
@@ -17,6 +20,7 @@ export const SIGSTORE_COMPONENTS: SigstoreComponent[] = [
     id: 'cosign',
     name: 'Cosign',
     icon: '✍️',
+    iconImage: '/assets/cosign.png',
     color: 'var(--accent-green)',
     tagline: 'The Signing Swiss Army Knife',
     description:
@@ -47,6 +51,7 @@ export const SIGSTORE_COMPONENTS: SigstoreComponent[] = [
     id: 'fulcio',
     name: 'Fulcio',
     icon: '📜',
+    iconImage: '/assets/fulcio.png',
     color: 'var(--accent-purple)',
     tagline: 'The Identity-Based Certificate Authority',
     description:
@@ -77,6 +82,7 @@ export const SIGSTORE_COMPONENTS: SigstoreComponent[] = [
     id: 'rekor',
     name: 'Rekor',
     icon: '📋',
+    iconImage: '/assets/rekor.png',
     color: 'var(--accent-cyan)',
     tagline: 'The Immutable Transparency Log',
     description:

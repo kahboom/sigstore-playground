@@ -70,16 +70,21 @@ export const SigningJourney: Component = () => {
     setArtifactHash(generateHash());
   };
 
-  const getComponentIcon = (component: Step['component']) => {
-    const icons = {
-      developer: '👩‍💻',
-      oidc: '🔐',
-      fulcio: '📜',
-      artifact: '📦',
-      rekor: '📋',
-      verifier: '✅',
-    };
-    return icons[component];
+  const getComponentIcon = (component: Step['component']): JSX.Element => {
+    switch (component) {
+      case 'fulcio':
+        return <img src="/assets/fulcio.png" alt="Fulcio" />;
+      case 'rekor':
+        return <img src="/assets/rekor.png" alt="Rekor" />;
+      case 'developer':
+        return <>👩‍💻</>;
+      case 'oidc':
+        return <>🔐</>;
+      case 'artifact':
+        return <>📦</>;
+      case 'verifier':
+        return <>✅</>;
+    }
   };
 
   const step = () => JOURNEY_STEPS[currentStep()];
@@ -181,7 +186,7 @@ export const SigningJourney: Component = () => {
                     Step {step()!.id} of {JOURNEY_STEPS.length}
                   </span>
                   <span class={`step-badge ${step()!.component}`}>
-                    {getComponentIcon(step()!.component)}{' '}
+                    {getComponentIcon(step()!.component)}
                     {step()!.component.toUpperCase()}
                   </span>
                 </div>

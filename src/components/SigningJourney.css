@@ -143,6 +143,12 @@
   z-index: 2;
 }
 
+.flow-node-icon img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
 @media (min-width: 768px) {
   .flow-node-icon {
     width: 60px;
@@ -839,6 +845,13 @@
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.05em;
+}
+
+.step-badge img {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  vertical-align: -0.15em;
 }
 
 .step-badge.developer {
