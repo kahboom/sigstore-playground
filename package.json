@@ -38,7 +38,7 @@
     "solid-motionone": "^1.0.3"
   },
   "devDependencies": {
-    "@codecov/vite-plugin": "^1.9.1",
+    "@codecov/vite-plugin": "^2.0.1",
     "@eslint/js": "^9.39.2",
     "@solidjs/testing-library": "^0.8.10",
     "@testing-library/jest-dom": "^6.9.1",
